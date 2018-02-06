@@ -1,0 +1,7 @@
+@charset "ISO-8859-1";
+
+table, tr, td{
+	text-align: center;
+	border-bottom: 1px solid #92959a;
+	width: 700px;
+}

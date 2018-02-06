@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+
+li.h1{
+	margin-top: 18px;
+}
+
+.h1 .h1user{
+	margin-right: 20px;
+	font-size: 20px;
+	color: blue;
+	display: block;
+}
+
+.h1user{
+	margin: 0;
+}
+
+.h1 .h2user{
+	margin-right: 10px;
+	font-size: 20px;
+	color: red;
+	display: block;
+}
+
+.h2user{
+	margin: 0;
+}
+
