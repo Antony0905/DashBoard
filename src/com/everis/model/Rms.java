@@ -1,287 +1,343 @@
 package com.everis.model;
 
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
 public class Rms {
 
-	private String DONO;
-	private int ID_DEMANDA;
-	private String DESCRICAO_DEMANDA;
-	private String TIPO_DEMANDA;
-	private String SOLICITANTE_VIVO;
-	private String ANAL_RESP;
-	private String DT_ENTRADA_ESTM;
-	private String DT_ENTREGA_ESTM;
-	private String DT_REAL_ESTM;
-	private String ESTIMATIVA_CLIENTE;
-	private int JORNADAS;
-	private int PONTOS;
-	private String SITUACAO_ESTIMATIVA;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-	private String LINHA_CAP;
-	private String INICIO_RMS;
-	private String FIM_RMS;
-	private String APROVACAO_RMS;
-	private String INICIO_DEV;
-	private String FIM_DEV;
-	private String INICIO_HOMO_EVERIS;
-	private String FIM_HOMO_EVERIS;
-	private String DT_RELEASE;
-	private String INPLANEJAMENTO;
-	private String FIMPLANEJAMENTO;
-	private String ANALISE_FUNCIONAL;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created;
+	private String dono;
+	private int id_Demanda;
+	private String descricao_demanda;
+	private String tipo_demanda;
+	private String solicitante_vivo;
+	private String anal_resp;
+	@Temporal(TemporalType.DATE)
+	private Date dt_entrada_estimada;
+	@Temporal(TemporalType.DATE)
+	private Date dt_entrega_estm;
+	@Temporal(TemporalType.DATE)
+	private Date dt_real_estm;
+	@Temporal(TemporalType.DATE)
+	private Date estimativa_cliente;
+	private int jornadas;
+	private int pontos;
+	private String situacao_estimativa;
 
-	private String ESTEIRA;
-	private String INICIO_HOMO_VIVO;
-	private String FIM_HOMO_VIVO;
-	private String INICIO_PREPROD;
-	private String FIM_PREPROD;
-	private String DEMANDA;
+	private String linha_cap;
+	@Temporal(TemporalType.DATE)
+	private Date inicio_rms;
+	@Temporal(TemporalType.DATE)
+	private Date fim_rms;
+	@Temporal(TemporalType.DATE)
+	private Date aprovacao_rms;
+	@Temporal(TemporalType.DATE)
+	private Date inicio_dev;
+	@Temporal(TemporalType.DATE)
+	private Date fim_dev;
+	@Temporal(TemporalType.DATE)
+	private Date inicio_homo_everis;
+	@Temporal(TemporalType.DATE)
+	private Date fim_homo_everis;
+	@Temporal(TemporalType.DATE)
+	private Date dt_release;
+	@Temporal(TemporalType.DATE)
+	private Date inplanejamento;
+	@Temporal(TemporalType.DATE)
+	private Date fimplanejamento;
+	private String analise_funcional;
 
-	public String getDONO() {
-		return DONO;
+	private String esteira;
+	@Temporal(TemporalType.DATE)
+	private Date inicio_homo_vivo;
+	@Temporal(TemporalType.DATE)
+	private Date fim_homo_vivo;
+	@Temporal(TemporalType.DATE)
+	private Date inicio_preprod;
+	@Temporal(TemporalType.DATE)
+	private Date fim_preprod;
+	private String demanda;
+
+	@PrePersist
+	protected void onCreate() {
+		created = new Date();
 	}
 
-	public void setDONO(String dONO) {
-		DONO = dONO;
+	public Long getId() {
+		return id;
 	}
 
-	public int getID_DEMANDA() {
-		return ID_DEMANDA;
+	public Date getCreated() {
+		return created;
 	}
 
-	public void setID_DEMANDA(int iD_DEMANDA) {
-		ID_DEMANDA = iD_DEMANDA;
+	public String getDono() {
+		return dono;
 	}
 
-	public String getDESCRICAO_DEMANDA() {
-		return DESCRICAO_DEMANDA;
+	public int getId_Demanda() {
+		return id_Demanda;
 	}
 
-	public void setDESCRICAO_DEMANDA(String dESCRICAO_DEMANDA) {
-		DESCRICAO_DEMANDA = dESCRICAO_DEMANDA;
+	public String getDescricao_demanda() {
+		return descricao_demanda;
 	}
 
-	public String getTIPO_DEMANDA() {
-		return TIPO_DEMANDA;
+	public String getTipo_demanda() {
+		return tipo_demanda;
 	}
 
-	public void setTIPO_DEMANDA(String tIPO_DEMANDA) {
-		TIPO_DEMANDA = tIPO_DEMANDA;
+	public String getSolicitante_vivo() {
+		return solicitante_vivo;
 	}
 
-	public String getSOLICITANTE_VIVO() {
-		return SOLICITANTE_VIVO;
+	public String getAnal_resp() {
+		return anal_resp;
 	}
 
-	public void setSOLICITANTE_VIVO(String sOLICITANTE_VIVO) {
-		SOLICITANTE_VIVO = sOLICITANTE_VIVO;
+	public Date getDt_entrada_estimada() {
+		return dt_entrada_estimada;
 	}
 
-	public String getANAL_RESP() {
-		return ANAL_RESP;
+	public Date getDt_entrega_estm() {
+		return dt_entrega_estm;
 	}
 
-	public void setANAL_RESP(String aNAL_RESP) {
-		ANAL_RESP = aNAL_RESP;
+	public Date getDt_real_estm() {
+		return dt_real_estm;
 	}
 
-	public String getDT_ENTRADA_ESTM() {
-		return DT_ENTRADA_ESTM;
+	public Date getEstimativa_cliente() {
+		return estimativa_cliente;
 	}
 
-	public void setDT_ENTRADA_ESTM(String dT_ENTRADA_ESTM) {
-		DT_ENTRADA_ESTM = dT_ENTRADA_ESTM;
+	public int getJornadas() {
+		return jornadas;
 	}
 
-	public String getDT_ENTREGA_ESTM() {
-		return DT_ENTREGA_ESTM;
+	public int getPontos() {
+		return pontos;
 	}
 
-	public void setDT_ENTREGA_ESTM(String dT_ENTREGA_ESTM) {
-		DT_ENTREGA_ESTM = dT_ENTREGA_ESTM;
+	public String getSituacao_estimativa() {
+		return situacao_estimativa;
 	}
 
-	public String getDT_REAL_ESTM() {
-		return DT_REAL_ESTM;
+	public String getLinha_cap() {
+		return linha_cap;
 	}
 
-	public void setDT_REAL_ESTM(String dT_REAL_ESTM) {
-		DT_REAL_ESTM = dT_REAL_ESTM;
+	public Date getInicio_rms() {
+		return inicio_rms;
 	}
 
-	public String getESTIMATIVA_CLIENTE() {
-		return ESTIMATIVA_CLIENTE;
+	public Date getFim_rms() {
+		return fim_rms;
 	}
 
-	public void setESTIMATIVA_CLIENTE(String eSTIMATIVA_CLIENTE) {
-		ESTIMATIVA_CLIENTE = eSTIMATIVA_CLIENTE;
+	public Date getAprovacao_rms() {
+		return aprovacao_rms;
 	}
 
-	public int getJORNADAS() {
-		return JORNADAS;
+	public Date getInicio_dev() {
+		return inicio_dev;
 	}
 
-	public void setJORNADAS(int jORNADAS) {
-		JORNADAS = jORNADAS;
+	public Date getFim_dev() {
+		return fim_dev;
 	}
 
-	public int getPONTOS() {
-		return PONTOS;
+	public Date getInicio_homo_everis() {
+		return inicio_homo_everis;
 	}
 
-	public void setPONTOS(int pONTOS) {
-		PONTOS = pONTOS;
+	public Date getFim_homo_everis() {
+		return fim_homo_everis;
 	}
 
-	public String getSITUACAO_ESTIMATIVA() {
-		return SITUACAO_ESTIMATIVA;
+	public Date getDt_release() {
+		return dt_release;
 	}
 
-	public void setSITUACAO_ESTIMATIVA(String sITUACAO_ESTIMATIVA) {
-		SITUACAO_ESTIMATIVA = sITUACAO_ESTIMATIVA;
+	public Date getInplanejamento() {
+		return inplanejamento;
 	}
 
-	public String getLINHA_CAP() {
-		return LINHA_CAP;
+	public Date getFimplanejamento() {
+		return fimplanejamento;
 	}
 
-	public void setLINHA_CAP(String lINHA_CAP) {
-		LINHA_CAP = lINHA_CAP;
+	public String getAnalise_funcional() {
+		return analise_funcional;
 	}
 
-	public String getINICIO_RMS() {
-		return INICIO_RMS;
+	public String getEsteira() {
+		return esteira;
 	}
 
-	public void setINICIO_RMS(String iNICIO_RMS) {
-		INICIO_RMS = iNICIO_RMS;
+	public Date getInicio_homo_vivo() {
+		return inicio_homo_vivo;
 	}
 
-	public String getFIM_RMS() {
-		return FIM_RMS;
+	public Date getFim_homo_vivo() {
+		return fim_homo_vivo;
 	}
 
-	public void setFIM_RMS(String fIM_RMS) {
-		FIM_RMS = fIM_RMS;
+	public Date getInicio_preprod() {
+		return inicio_preprod;
 	}
 
-	public String getAPROVACAO_RMS() {
-		return APROVACAO_RMS;
+	public Date getFim_preprod() {
+		return fim_preprod;
 	}
 
-	public void setAPROVACAO_RMS(String aPROVACAO_RMS) {
-		APROVACAO_RMS = aPROVACAO_RMS;
+	public String getDemanda() {
+		return demanda;
 	}
 
-	public String getINICIO_DEV() {
-		return INICIO_DEV;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setINICIO_DEV(String iNICIO_DEV) {
-		INICIO_DEV = iNICIO_DEV;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
 
-	public String getFIM_DEV() {
-		return FIM_DEV;
+	public void setDono(String dono) {
+		this.dono = dono;
 	}
 
-	public void setFIM_DEV(String fIM_DEV) {
-		FIM_DEV = fIM_DEV;
+	public void setId_Demanda(int id_Demanda) {
+		this.id_Demanda = id_Demanda;
 	}
 
-	public String getINICIO_HOMO_EVERIS() {
-		return INICIO_HOMO_EVERIS;
+	public void setDescricao_demanda(String descricao_demanda) {
+		this.descricao_demanda = descricao_demanda;
 	}
 
-	public void setINICIO_HOMO_EVERIS(String iNICIO_HOMO_EVERIS) {
-		INICIO_HOMO_EVERIS = iNICIO_HOMO_EVERIS;
+	public void setTipo_demanda(String tipo_demanda) {
+		this.tipo_demanda = tipo_demanda;
 	}
 
-	public String getFIM_HOMO_EVERIS() {
-		return FIM_HOMO_EVERIS;
+	public void setSolicitante_vivo(String solicitante_vivo) {
+		this.solicitante_vivo = solicitante_vivo;
 	}
 
-	public void setFIM_HOMO_EVERIS(String fIM_HOMO_EVERIS) {
-		FIM_HOMO_EVERIS = fIM_HOMO_EVERIS;
+	public void setAnal_resp(String anal_resp) {
+		this.anal_resp = anal_resp;
 	}
 
-	public String getDT_RELEASE() {
-		return DT_RELEASE;
+	public void setDt_entrada_estimada(Date dt_entrada_estimada) {
+		this.dt_entrada_estimada = dt_entrada_estimada;
 	}
 
-	public void setDT_RELEASE(String dT_RELEASE) {
-		DT_RELEASE = dT_RELEASE;
+	public void setDt_entrega_estm(Date dt_entrega_estm) {
+		this.dt_entrega_estm = dt_entrega_estm;
 	}
 
-	public String getINPLANEJAMENTO() {
-		return INPLANEJAMENTO;
+	public void setDt_real_estm(Date dt_real_estm) {
+		this.dt_real_estm = dt_real_estm;
 	}
 
-	public void setINPLANEJAMENTO(String iNPLANEJAMENTO) {
-		INPLANEJAMENTO = iNPLANEJAMENTO;
+	public void setEstimativa_cliente(Date estimativa_cliente) {
+		this.estimativa_cliente = estimativa_cliente;
 	}
 
-	public String getFIMPLANEJAMENTO() {
-		return FIMPLANEJAMENTO;
+	public void setJornadas(int jornadas) {
+		this.jornadas = jornadas;
 	}
 
-	public void setFIMPLANEJAMENTO(String fIMPLANEJAMENTO) {
-		FIMPLANEJAMENTO = fIMPLANEJAMENTO;
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
 	}
 
-	public String getANALISE_FUNCIONAL() {
-		return ANALISE_FUNCIONAL;
+	public void setSituacao_estimativa(String situacao_estimativa) {
+		this.situacao_estimativa = situacao_estimativa;
 	}
 
-	public void setANALISE_FUNCIONAL(String aNALISE_FUNCIONAL) {
-		ANALISE_FUNCIONAL = aNALISE_FUNCIONAL;
+	public void setLinha_cap(String linha_cap) {
+		this.linha_cap = linha_cap;
 	}
 
-	public String getESTEIRA() {
-		return ESTEIRA;
+	public void setInicio_rms(Date inicio_rms) {
+		this.inicio_rms = inicio_rms;
 	}
 
-	public void setESTEIRA(String eSTEIRA) {
-		ESTEIRA = eSTEIRA;
+	public void setFim_rms(Date fim_rms) {
+		this.fim_rms = fim_rms;
 	}
 
-	public String getINICIO_HOMO_VIVO() {
-		return INICIO_HOMO_VIVO;
+	public void setAprovacao_rms(Date aprovacao_rms) {
+		this.aprovacao_rms = aprovacao_rms;
 	}
 
-	public void setINICIO_HOMO_VIVO(String iNICIO_HOMO_VIVO) {
-		INICIO_HOMO_VIVO = iNICIO_HOMO_VIVO;
+	public void setInicio_dev(Date inicio_dev) {
+		this.inicio_dev = inicio_dev;
 	}
 
-	public String getFIM_HOMO_VIVO() {
-		return FIM_HOMO_VIVO;
+	public void setFim_dev(Date fim_dev) {
+		this.fim_dev = fim_dev;
 	}
 
-	public void setFIM_HOMO_VIVO(String fIM_HOMO_VIVO) {
-		FIM_HOMO_VIVO = fIM_HOMO_VIVO;
+	public void setInicio_homo_everis(Date inicio_homo_everis) {
+		this.inicio_homo_everis = inicio_homo_everis;
 	}
 
-	public String getINICIO_PREPROD() {
-		return INICIO_PREPROD;
+	public void setFim_homo_everis(Date fim_homo_everis) {
+		this.fim_homo_everis = fim_homo_everis;
 	}
 
-	public void setINICIO_PREPROD(String iNICIO_PREPROD) {
-		INICIO_PREPROD = iNICIO_PREPROD;
+	public void setDt_release(Date dt_release) {
+		this.dt_release = dt_release;
 	}
 
-	public String getFIM_PREPROD() {
-		return FIM_PREPROD;
+	public void setInplanejamento(Date inplanejamento) {
+		this.inplanejamento = inplanejamento;
 	}
 
-	public void setFIM_PREPROD(String fIM_PREPROD) {
-		FIM_PREPROD = fIM_PREPROD;
+	public void setFimplanejamento(Date fimplanejamento) {
+		this.fimplanejamento = fimplanejamento;
 	}
 
-	public String getDEMANDA() {
-		return DEMANDA;
+	public void setAnalise_funcional(String analise_funcional) {
+		this.analise_funcional = analise_funcional;
 	}
 
-	public void setDEMANDA(String dEMANDA) {
-		DEMANDA = dEMANDA;
+	public void setEsteira(String esteira) {
+		this.esteira = esteira;
+	}
+
+	public void setInicio_homo_vivo(Date inicio_homo_vivo) {
+		this.inicio_homo_vivo = inicio_homo_vivo;
+	}
+
+	public void setFim_homo_vivo(Date fim_homo_vivo) {
+		this.fim_homo_vivo = fim_homo_vivo;
+	}
+
+	public void setInicio_preprod(Date inicio_preprod) {
+		this.inicio_preprod = inicio_preprod;
+	}
+
+	public void setFim_preprod(Date fim_preprod) {
+		this.fim_preprod = fim_preprod;
+	}
+
+	public void setDemanda(String demanda) {
+		this.demanda = demanda;
 	}
 
 }

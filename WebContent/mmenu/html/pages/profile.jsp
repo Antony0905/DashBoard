@@ -1,9 +1,11 @@
+<%@page import="com.everis.dao.DaoGeneric"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
 	import="javax.servlet.http.HttpSession"   
 	import="java.util.List" 
-	import="com.everis.dao.RmsDao"
 	import="com.everis.model.Rms"
+	import="com.everis.dao.DaoGeneric"
+	import="java.util.ArrayList"
 %>
 
 <!DOCTYPE html>
@@ -562,8 +564,9 @@
 	if(nome == null){
 		nome = "";
 	}
-	RmsDao dao = new RmsDao();
-	List listaRms = (List) dao.getListaRms(nome);%>
+	DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
+	List<Rms> listaRms = new ArrayList<Rms>();
+	listaRms = daoGeneric.buscarRms(Rms.class, nome);%>
 												<form action="../../../UpdateRms" method="POST">
 													<table id="tableProfile">
 													<thead>
@@ -589,14 +592,14 @@
 															%>
 															<tr>
 																<td><%out.println(j);%></td>
-																<td><% out.println(rms.getID_DEMANDA()); %></td>
-																<td><% out.println(rms.getDESCRICAO_DEMANDA()); %></td>
-																<td><% out.println(rms.getESTEIRA()); %></td>
-																<td><% out.println(rms.getDT_RELEASE()); %></td>
-																<td><% out.println(rms.getDEMANDA()); %></td>
-																<td><a href="../../../UpdateRms?idDemanda=<%out.println(rms.getID_DEMANDA());%>"><img src="../../../global/img/view.png" title="View"/></a></td>
-																<td><a href="../../../UpdateRms?idDemanda=<%out.println(rms.getID_DEMANDA());%>"><img src="../../../global/img/refresh.png"title="Update"/></a></td>
-																<td><a href="../../../ExcluirRms?idDemanda=<%out.println(rms.getID_DEMANDA());%>"><img src="../../../global/img/x.png" title="Remove"/></a></td>
+																<td><% out.println(rms.getId_Demanda()); %></td>
+																<td><% out.println(rms.getDescricao_demanda()); %></td>
+																<td><% out.println(rms.getEsteira()); %></td>
+																<td><% out.println(rms.getDt_release()); %></td>
+																<td><% out.println(rms.getDemanda()); %></td>
+																<td><a href="../../../UpdateRms?idDemanda=<%out.println(rms.getId_Demanda());%>"><img src="../../../global/img/view.png" title="View"/></a></td>
+																<td><a href="../../../UpdateRms?idDemanda=<%out.println(rms.getId_Demanda());%>"><img src="../../../global/img/refresh.png"title="Update"/></a></td>
+																<td><a href="../../../ExcluirRms?idDemanda=<%out.println(rms.getId_Demanda());%>"><img src="../../../global/img/x.png" title="Remove"/></a></td>
 															</tr>	
 														<% } %>
 													</tbody>

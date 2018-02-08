@@ -2,40 +2,33 @@ package com.everis.servlets.controller;
  
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.everis.dao.RmsDao;
+import com.everis.dao.DaoGeneric;
 import com.everis.model.Rms;
 
 public class ExcluirRms extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
 	public ExcluirRms() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		PrintWriter out = response.getWriter();
-		String idDemanda = request.getParameter("idDemanda");
 		Rms rms = new Rms();
-		RmsDao dao = new RmsDao();
-		rms.setID_DEMANDA(Integer.parseInt(idDemanda));
-		String retorno = "falha";
+		int idDemanda = Integer.parseInt(request.getParameter("idDemanda"));
+		rms.setId_Demanda(idDemanda);
+		boolean retorno = daoGeneric.removePorId(rms, idDemanda);
 
-		try {
-			retorno = dao.deleteRms(rms);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		if (retorno.equals("sucesso")) {
+		if (retorno) {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("<head>");
