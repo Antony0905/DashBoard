@@ -255,7 +255,7 @@
         <!-- End Navbar Toolbar -->
         
         <!-- Navbar Toolbar Right -->
-        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right" style="padding-right: 20px;">
           <li class="h1">
              <% String nome = (String) session.getAttribute("user"); 
 									            if(nome != null){
@@ -638,6 +638,31 @@
     <div class="page-content padding-30 container-fluid">
       <div class="row" data-plugin="matchHeight" data-by-row="true">
         <div class="col-lg-3 col-sm-6">
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
           <!-- Widget Linearea One-->
 <!--          <div class="widget widget-shadow" id="widgetLineareaOne">
             <div class="widget-content">

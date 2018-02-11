@@ -1,12 +1,7 @@
 <%@page import="java.util.Iterator"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-	import="javax.servlet.http.HttpSession"   
-	import="java.util.List" 
-	import="com.everis.dao.RmsDao"
-	import="com.everis.model.Rms"
 %>
-<% response.sendRedirect("../../../ViewRms");%>
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 <head>
@@ -273,7 +268,7 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
+                <a href="../pages/profile.jsp" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
               </li>
               <li role="presentation">
                 <a href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Billing</a>
@@ -283,7 +278,7 @@
               </li>
               <li class="divider" role="presentation"></li>
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
+                <a href="../../../jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
               </li>
             </ul>
           </li>
@@ -500,17 +495,17 @@
         </a>
         <ul class="site-menu-sub">
           <li class="site-menu-item">
-            <a class="animsition-link" href="../layouts/menu-collapsed.html">
+            <a class="animsition-link" href="../layouts/menu-collapsed.jsp">
               <span class="site-menu-title">Nova Demanda</span>
             </a>
           </li>
           <li class="site-menu-item">
-            <a class="animsition-link" href="../layouts/grids.html">
+            <a class="animsition-link" href="../layouts/grids.jsp">
               <span class="site-menu-title">Editar Demanda</span>
             </a>
           </li>
           <li class="site-menu-item active">
-            <a class="animsition-link" href="../layouts/layout-grid.html">
+            <a class="animsition-link" href="../layouts/layout-grid.jsp">
               <span class="site-menu-title">Excluir Demanda</span>
             </a>
           </li>
@@ -525,25 +520,25 @@
         <ul class="site-menu-sub">
 
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/register.html">
+            <a class="animsition-link" href="../pages/register.jsp">
               <span class="site-menu-title">Cadastrar Usuário</span>
             </a>
           </li>
 
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/register-v2.html">
+            <a class="animsition-link" href="../pages/register-v2.jsp">
               <span class="site-menu-title">Cadastrar Gerente</span>
             </a>
           </li>
  
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/login.html">
+            <a class="animsition-link" href="../pages/login.jsp">
               <span class="site-menu-title">Login</span>
             </a>
           </li>
 
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/profile.html">
+            <a class="animsition-link" href="../pages/profile.jsp">
               <span class="site-menu-title">Perfil</span>
             </a>
           </li>
@@ -645,22 +640,6 @@
         			<input type="submit" value="Buscar">
         		</form>
  				<br><br>
- 				
- 				<%         				
-        			List<Rms> listaRms = (List<Rms>) request.getAttribute("listaRms");
-					
-        			Rms rms = new Rms();
-        			rms = (Rms) listaRms.get(0);
-          		%>
-
-          		ID Demanda
-          		<%out.print(rms.getID_DEMANDA()); %>
-          		<br><br>
-          		Esteira
-          		<%out.print(rms.getESTEIRA()); %>
-          		<br><br>
-          		Descrição
-          		<%out.print(rms.getDESCRICAO_DEMANDA()); %>
           		<br><br>
           		
           	</div>

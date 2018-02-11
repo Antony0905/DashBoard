@@ -24,7 +24,7 @@ public class ExcluirRms extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		Rms rms = new Rms();
-		int idDemanda = Integer.parseInt(request.getParameter("idDemanda"));
+		String idDemanda = request.getParameter("idDemanda");
 		rms.setId_Demanda(idDemanda);
 		boolean retorno = daoGeneric.removePorId(rms, idDemanda);
 

@@ -1,3 +1,11 @@
+<%@page import="com.everis.dao.DaoGeneric"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"
+	import="javax.servlet.http.HttpSession"   
+	import="java.util.List" 
+	import="com.everis.model.Rms"
+	import="java.util.ArrayList"
+%>
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="en">
 <head>
@@ -289,7 +297,7 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
+                <a href="../pages/profile.jsp" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
               </li>
               <li role="presentation">
                 <a href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Billing</a>
@@ -299,7 +307,7 @@
               </li>
               <li class="divider" role="presentation"></li>
               <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
+                <a href="../../../jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
               </li>
             </ul>
           </li>
@@ -516,18 +524,18 @@
         </a>
         <ul class="site-menu-sub">
           <li class="site-menu-item">
-            <a class="animsition-link" href="../layouts/menu-collapsed.html">
+            <a class="animsition-link" href="../layouts/menu-collapsed.jsp">
               <span class="site-menu-title">Nova Demanda</span>
             </a>
           </li>
 
           <li class="site-menu-item active">
-            <a class="animsition-link" href="../layouts/grids.html">
+            <a class="animsition-link" href="../layouts/grids.jsp">
               <span class="site-menu-title">Editar Demanda</span>
             </a>
           </li>
           <li class="site-menu-item">
-            <a class="animsition-link" href="../layouts/layout-grid.html">
+            <a class="animsition-link" href="../layouts/layout-grid.jsp">
               <span class="site-menu-title">Excluir Demanda</span>
             </a>
           </li>
@@ -541,26 +549,26 @@
         </a>
         <ul class="site-menu-sub">
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/register.html">
+            <a class="animsition-link" href="../pages/register.jsp">
               <span class="site-menu-title">Novo Usuário</span>
             </a>
           </li>
 
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/register-v2.html">
+            <a class="animsition-link" href="../pages/register-v2.jsp">
               <span class="site-menu-title">Novo Gerente</span>
             </a>
           </li>
 
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/login.html">
+            <a class="animsition-link" href="../pages/login.jsp">
               <span class="site-menu-title">Login</span>
             </a>
           </li>
 
 
           <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/profile.html">
+            <a class="animsition-link" href="../pages/profile.jsp">
               <span class="site-menu-title">Perfil</span>
             </a>
           </li>
@@ -662,16 +670,27 @@
       <h1 class="page-title">Editar Demanda</h1>
     </div>	
 
-    <div class="page-content">
+        <div class="page-content">
       <div class="panel">
         <div class="panel-heading">
-          <h3 class="panel-title">Preencha o Formulário Abaixo</h3> 
+	        <div style="display: inline-flex;width: 100%;">
+	          <h3 class="panel-title" style="width: 400px">Preencha o Formulário Abaixo</h3>
+	          <form class="panel-title" action="../../../BuscarRms" method="POST" style="width:100%; float: right;">
+	           	<div  style="float: right;">
+		          	<label> Buscar Demanda Por ID <input type="text" name="pesquisa" id="pesquisa" required="required"> </label>
+		          	<input type="submit" value="Pesquisar" name="pesquisar" id="pesquisar">
+	          	</div>
+	          </form>
+	        </div> 
+	        
+	        <% List<Rms> listaRms = (List<Rms>) session.getAttribute("listaRms"); 
+	        if(listaRms == null || listaRms.isEmpty()){%>
           <form action="../../../InserirRms" method="post"> 
               <fieldset id="fildset">
                   <div class="divgrupo">
                       <p class="grupo"> FASE DE ESTIMATIVA </p>
                   </div>
-                  <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" required> </label>
+                  <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" readonly> </label>
                   <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" required > </label>
                   <label> Tipo da Demanda<select name="tipodemanda"> 
                   		<option name="pp" value="pp">PP</option>
@@ -691,8 +710,8 @@
                   <label> Jornadas  <input type="number" name="jornadas" id="jornadas"></label> 
                   <label> Pontos <input type="number" name="pontos" id="pontos"></label> <br><br>
                   
-                  <!-- Se a situaÃƒÂ§ÃƒÂ£o da demanda estiver em "APROVADA" deve aparecer o prÃ³ximo formulÃ¡rio
-                  Caso for reprovada deve finalizar a demanda, demais opÃ§Ãµes permanecer em aberto-->
+                  <!-- Se a situaÃ§Ã£o da demanda estiver em "APROVADA" deve aparecer o próximo formulário
+                  Caso for reprovada deve finalizar a demanda, demais opções permanecer em aberto-->
                   <label>Situação da Estimativa <select name="situacao" id="situacao" onchange="optionCheck()"> 
                     <option name="aberta" value="aberta"> Aberta </option>
                     <option name="andamento" value="andamento"> Em Andamento </option>
@@ -712,7 +731,7 @@
                   <label> Aprovação RMS v1 <input type="date" name="aprms" id="aprmsv1"></label>
                   <label> Início Dev <input type="date" name="indev" id="indev"></label>
                   <label> Fim Dev <input type="date" name="fimdev" id="fimdev"></label> <br><br>
-                  <label> InÃ­cio Homologação Everis <input type="date" name="inhomoeveris" id="inhomoeveris"></label>
+                  <label> Início Homologação Everis <input type="date" name="inhomoeveris" id="inhomoeveris"></label>
                   <label> Fim Homologação Everis <input type="date" name="fimhomoeveris" id="fimhomoeveris""></label> <br><br>
                   <label> Data de Release <input type="date" name="datarelease" id="datarelease""></label>
                   <label> Início Planejamento  <input type="date" name="inplanejamento" id="planejamento""></label>
@@ -728,7 +747,7 @@
                     
                   <div id="hidden2" style = "visibility:hidden; display:none;">
                   <div class="divgrupo">
-                      <p class="grupo"> FASE DE HOMOLOGAÇÃƒO </p>
+                      <p class="grupo"> FASE DE HOMOLOGAÇÃO </p>
                   </div>
                   
                   <label> Esteira <input type="text" name="esteira" id="esteira"></label>
@@ -741,25 +760,151 @@
 				  	<option name="concluido" value="concluido"> Concluída </option>
 				  	<option name="cancelada" value="cancelada"> Cancelada </option>
 				  </select></label>  <br><br> 
-				  
 				  </div>
                   <input type="submit" value="Cadastrar" id="submit"> 
+                  <input type="reset" value="Limpar">
+              </fieldset>
+          </form>
+          <% }else{ 
+          Rms rms = listaRms.get(0);%>
+          <form action="../../../AtualizarRms" method="post"> 
+              <fieldset id="fildset">
+                  <div class="divgrupo">
+                      <p class="grupo"> FASE DE ESTIMATIVA </p>
+                  </div>
+                  <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" value="<%out.println(rms.getId_Demanda()); %>" readonly> </label>
+                  <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" value="<%out.println(rms.getDescricao_demanda()); %>" required > </label>
+                  <%if(rms.getTipo_demanda().equals("pp")){ %>
+                  <label> Tipo da Demanda<select name="tipodemanda"> 
+                  		<option name="pp" value="pp" selected="selected">PP</option>
+                  		<option name="projeto" value="Projeto">Projeto</option>
+                  </select>  </label>
+                  <% }else{%>
+                  <label> Tipo da Demanda<select name="tipodemanda"> 
+                  		<option name="pp" value="pp">PP</option>
+                  		<option name="projeto" value="Projeto" selected="selected">Projeto</option>
+                  </select>  </label>
+                  <%} %>
+                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo" value="<%out.println(rms.getSolicitante_vivo()); %>"> </label> <br><br>
+				
+				
+                  <label> Analista Responsável <input type="text" name="analresp" id="analresp" value="<%out.println(rms.getAnal_resp()); %>"> </label>
+                  <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada" value="<%out.print(rms.getDt_entrada_estimada());%>" /> </label> 
+                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega" value="<%out.print(rms.getDt_entrega_estm());%>"/></label> <br><br>
+                  <label> Data Estimada Real  <input type="date" name="real" id="real" value="<%out.print(rms.getDt_real_estm());%>"/></label> <br><br>
+                  <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente" value="<%out.print(rms.getEstimativa_cliente());%>"></label> 
+                  
+                  
+                  <!--  Cada Jornada Equivale a 8 horas e cada ponto a 4 horas  --> 
+                  <label> Jornadas  <input type="number" name="jornadas" id="jornadas" value="<%out.print(rms.getJornadas());%>"/></label> 
+                  <label> Pontos <input type="number" name="pontos" id="pontos" value="<%out.print(rms.getPontos());%>"/></label> <br><br>
+                  
+                  <!-- Se a situaÃ§Ã£o da demanda estiver em "APROVADA" deve aparecer o próximo formulário
+                  Caso for reprovada deve finalizar a demanda, demais opções permanecer em aberto-->
+                  <label>Situação da Estimativa <select name="situacao" id="situacao" onchange="optionCheck()"> 
+                    <option name="aberta" value="aberta"> Aberta </option>
+                    <option name="andamento" value="andamento"> Em Andamento </option>
+                    <option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
+                    <option name="aprovada"  value="aprovada"> Aprovada </option>
+                    <option name="reprovada" value="reprovada"> Reprovada </option>
+                  </select> </label> <br><br>	
+                  
+                  <div>
+                  <div class="divgrupo">
+                      <p class="grupo"> FASE DE DESENVOLVIMENTO </p>
+                  </div>
+
+                  <label> Linha CAP <input type="text" name="linhacap" id="linhacap" value="<%out.print(rms.getLinha_cap());%>"></label>
+                  <label> Início RMS v1 <input type="date" name="inrms" id="inrmsv1" value="<%out.print(rms.getInicio_rms());%>"></label>
+                  <label> Fim RMS v1 <input type="date" name="fimrms" id="fimrmsv1" value="<%out.print(rms.getFim_rms());%>"></label> <br><br>
+                  <label> Aprovação RMS v1 <input type="date" name="aprms" id="aprmsv1" value="<%out.print(rms.getAprovacao_rms());%>"></label>
+                  <label> Início Dev <input type="date" name="indev" id="indev"  value="<%out.print(rms.getInicio_dev());%>"></label>
+                  <label> Fim Dev <input type="date" name="fimdev" id="fimdev" value="<%out.print(rms.getFim_dev());%>"></label> <br><br>
+                  <label> Início Homologação Everis <input type="date" name="inhomoeveris" id="inhomoeveris" value="<%out.print(rms.getInicio_homo_everis());%>"></label>
+                  <label> Fim Homologação Everis <input type="date" name="fimhomoeveris" id="fimhomoeveris" value="<%out.print(rms.getFim_homo_everis());%>"></label> <br><br>
+                  <label> Data de Release <input type="date" name="datarelease" id="datarelease""></label>
+                  <label> Início Planejamento  <input type="date" name="inplanejamento" id="planejamento" value="<%out.print(rms.getInplanejamento());%>"></label>
+                  <label> Fim Planejamento  <input type="date" name="fimplanejamento" id="planejamento" value="<%out.print(rms.getFimplanejamento());%>"></label>
+                  
+                  <%if(rms.getAnalise_funcional().equals("andamento")){%>
+                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento" selected="selected"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado"> Cancelado </option>
+                    <option name="finalizado" value="finalizado"> Finalizado </option>
+                    <option name="pendente" value="pendente"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  <%if(rms.getAnalise_funcional().equals("cancelado")){%>
+                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado" selected="selected"> Cancelado </option>
+                    <option name="finalizado" value="finalizado"> Finalizado </option>
+                    <option name="pendente" value="pendente"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  <%if(rms.getAnalise_funcional().equals("finalizado")){%>
+                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado"> Cancelado </option>
+                    <option name="finalizado" value="finalizado" selected="selected"> Finalizado </option>
+                    <option name="pendente" value="pendente"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  <%if(rms.getAnalise_funcional().equals("pendente")){%>
+                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado"> Cancelado </option>
+                    <option name="finalizado" value="finalizado"> Finalizado </option>
+                    <option name="pendente" value="pendente" selected="selected"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  </div>				
+                    
+                  <div>
+                  <div class="divgrupo">
+                      <p class="grupo"> FASE DE HOMOLOGAÇÃO </p>
+                  </div>
+                  
+                  <label> Esteira <input type="text" name="esteira" id="esteira" value="<%out.print(rms.getEsteira());%>"></label>
+                  <label> Início Homologação VIVO <input type="date" name="inhomovivo" id="inhomovivo" value="<%out.print(rms.getInicio_homo_vivo());%>"></label>
+                  <label> Fim Homologação VIVO <input type="date" name="fimhomovivo" id="fimhomovivo" value="<%out.print(rms.getFim_homo_vivo());%>"></label> <br><br>
+                  <label> Início Pré-Prod <input type="date" name="inpreprod" id="inpreprod" value="<%out.print(rms.getInicio_preprod());%>"></label>
+                  <label> Fim Pré-Prod <input type="date" name="fimpreprod" id="fimpreprod" value="<%out.print(rms.getFim_preprod());%>"></label>
+				  <%if(rms.getDemanda().equals("andamento")){ %>
+				  <label> Demanda <select name="demanda" id="demanda">
+				  	<option name="andamento" value="andamento" selected="selected"> Em Andamento </option>
+				  	<option name="concluido" value="concluido"> Concluída </option>
+				  	<option name="cancelada" value="cancelada"> Cancelada </option>
+				  </select></label>  <br><br> 
+				  <%}%>
+				  <%if(rms.getDemanda().equals("concluido")){ %>
+				  <label> Demanda <select name="demanda" id="demanda">
+				  	<option name="andamento" value="andamento" > Em Andamento </option>
+				  	<option name="concluido" value="concluido" selected="selected"> Concluída </option>
+				  	<option name="cancelada" value="cancelada"> Cancelada </option>
+				  </select></label>  <br><br> 
+				  <%}%>
+				   <%if(rms.getDemanda().equals("cancelada")){ %>
+				  <label> Demanda <select name="demanda" id="demanda">
+				  	<option name="andamento" value="andamento" > Em Andamento </option>
+				  	<option name="concluido" value="concluido" > Concluída </option>
+				  	<option name="cancelada" value="cancelada" selected="selected"> Cancelada </option>
+				  </select></label>  <br><br> 
+				  <%}%>
+				  </div>
+                  <input type="submit" value="Atualizar" id="submit"> 
                   <input type="reset" value="Limpar">
 
               </fieldset>
           </form>
+          <%} %>
         </div>
         <div class="panel-body">
-
+		<% session.removeAttribute("listaRms"); %>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- CÃ³digo aqui dentro -->
- 
-
-
 
 
   <!-- Footer -->

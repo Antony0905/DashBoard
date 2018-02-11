@@ -37,9 +37,10 @@ public class InserirRms extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		HttpSession session = request.getSession();
+		boolean rmsJaCadastrada;
 
+		String idDemanda = request.getParameter("iddemanda");
 		String dono = (String) session.getAttribute("user");
-		int iddemanda = Integer.parseInt(request.getParameter("iddemanda"));
 		String descdemanda = request.getParameter("descdemanda");
 		String tipodemanda = request.getParameter("tipodemanda");
 		String solvivo = request.getParameter("solvivo");
@@ -72,196 +73,201 @@ public class InserirRms extends HttpServlet {
 		String fimpreprod = request.getParameter("fimpreprod");
 		String demanda = request.getParameter("demanda");
 
-		try {
+		rmsJaCadastrada = daoGeneric.verificarSeRmsJaEstaCadastrada(Rms.class, idDemanda);
+		if (rmsJaCadastrada == false) {
+			try {
 
-			if (solvivo.equals("")) {
-				solvivo = "null";
+				if (solvivo.equals("")) {
+					solvivo = "null";
+				}
+
+				if (analresp.equals("")) {
+					analresp = "null";
+				}
+
+				if (entrada.equals("")) {
+					rms.setDt_entrada_estimada(null);
+				} else {
+					rms.setDt_entrada_estimada(formatter.parse(entrada));
+				}
+
+				if (entrega.equals("")) {
+					rms.setDt_entrega_estm(null);
+				} else {
+					rms.setDt_entrega_estm(formatter.parse(entrega));
+				}
+
+				if (real.equals("")) {
+					rms.setDt_real_estm(null);
+				} else {
+					rms.setDt_real_estm(formatter.parse(real));
+				}
+
+				if (estimacliente.equals("")) {
+					rms.setEstimativa_cliente(null);
+				} else {
+					rms.setEstimativa_cliente(formatter.parse(estimacliente));
+				}
+
+				if (auxjornadas.equals("")) {
+					auxjornadas = "0";
+					jornadas = Integer.parseInt(auxjornadas);
+				} else {
+					jornadas = Integer.parseInt(auxjornadas);
+				}
+
+				if (auxpontos.equals("")) {
+					auxpontos = "0";
+					pontos = Integer.parseInt(auxpontos);
+				} else {
+					pontos = Integer.parseInt(auxpontos);
+				}
+
+				if (linhacap.equals("")) {
+					linhacap = "null";
+				}
+
+				if (inrms.equals("")) {
+					rms.setInicio_rms(null);
+				} else {
+					rms.setInicio_rms(formatter.parse(inrms));
+				}
+
+				if (fimrms.equals("")) {
+					rms.setFim_rms(null);
+				} else {
+					rms.setFim_rms(formatter.parse(fimrms));
+				}
+
+				if (aprms.equals("")) {
+					rms.setAprovacao_rms(null);
+				} else {
+					rms.setAprovacao_rms(formatter.parse(aprms));
+				}
+
+				if (indev.equals("")) {
+					rms.setInicio_dev(null);
+				} else {
+					rms.setInicio_dev(formatter.parse(indev));
+				}
+
+				if (fimdev.equals("")) {
+					rms.setFim_dev(null);
+				} else {
+					rms.setFim_dev(formatter.parse(fimdev));
+				}
+
+				if (inhomoeveris.equals("")) {
+					rms.setInicio_homo_everis(null);
+				} else {
+					rms.setInicio_homo_everis(formatter.parse(inhomoeveris));
+				}
+
+				if (fimhomoeveris.equals("")) {
+					rms.setFim_homo_everis(null);
+				} else {
+					rms.setFim_homo_everis(formatter.parse(fimhomoeveris));
+				}
+
+				if (datarelease.equals("")) {
+					rms.setDt_release(null);
+				} else {
+					rms.setDt_release(formatter.parse(datarelease));
+				}
+
+				if (inplanejamento.equals("")) {
+					rms.setInplanejamento(null);
+				} else {
+					rms.setInplanejamento(formatter.parse(inplanejamento));
+				}
+
+				if (fimplanejamento.equals("")) {
+					rms.setFimplanejamento(null);
+				} else {
+					rms.setFimplanejamento(formatter.parse(fimplanejamento));
+				}
+
+				if (esteira.equals("")) {
+					esteira = "null";
+				}
+
+				if (inhomovivo.equals("")) {
+					rms.setInicio_homo_vivo(null);
+				} else {
+					rms.setInicio_homo_vivo(formatter.parse(inhomovivo));
+				}
+
+				if (fimhomovivo.equals("")) {
+					rms.setFim_homo_vivo(null);
+				} else {
+					rms.setFim_homo_vivo(formatter.parse(fimhomovivo));
+				}
+
+				if (inpreprod.equals("")) {
+					rms.setInicio_preprod(null);
+				} else {
+					rms.setInicio_preprod(formatter.parse(inpreprod));
+				}
+
+				if (fimpreprod.equals("")) {
+					rms.setFim_preprod(null);
+				} else {
+					rms.setFim_preprod(formatter.parse(fimpreprod));
+				}
+
+				rms.setDono(dono);
+				rms.setId_Demanda(idDemanda);
+				rms.setDescricao_demanda(descdemanda);
+				rms.setTipo_demanda(tipodemanda);
+				rms.setSolicitante_vivo(solvivo);
+				rms.setAnal_resp(analresp);
+				rms.setJornadas(jornadas);
+				rms.setPontos(pontos);
+				rms.setSituacao_estimativa(situacao);
+				rms.setLinha_cap(linhacap);
+				rms.setAnalise_funcional(analfun);
+				rms.setEsteira(esteira);
+				rms.setDemanda(demanda);
+				Boolean retorno = daoGeneric.salvar(rms);
+
+				if (retorno) {
+					out.println("<!DOCTYPE html>");
+					out.println("<html>");
+					out.println("<head>");
+					out.println("<title> Servlet </title>");
+					out.println("</head>");
+					out.println("<body>");
+					out.println("<h1> Inserção Realizada com Sucesso!! '" + dono + "' '" + idDemanda + "' '" + "' '"
+							+ situacao + "' '" + analfun + "' </h1>");
+					out.println("</body>");
+					out.println("</html>");
+				} else {
+					out.println("<!DOCTYPE html>");
+					out.println("<html>");
+					out.println("<head>");
+					out.println("<title> Servlet </title>");
+					out.println("</head>");
+					out.println("<body>");
+					out.println("<h1> ERRO: Não foi possível inserir '" + esteira + "' '" + inhomovivo + "' '"
+							+ fimhomovivo + "' '" + inpreprod + "' '" + fimpreprod + "' '" + demanda + "'  </h1>");
+					out.println("</body>");
+					out.println("</html>");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
-			if (analresp.equals("")) {
-				analresp = "null";
-			}
-
-			if (entrada.equals("")) {
-				rms.setDt_entrada_estimada(null);
-			} else {
-				rms.setDt_entrada_estimada(formatter.parse(entrada));
-			}
-
-			if (entrega.equals("")) {
-				rms.setDt_entrega_estm(null);
-			} else {
-				rms.setDt_entrega_estm(formatter.parse(entrega));
-			}
-
-			if (real.equals("")) {
-				rms.setDt_real_estm(null);
-			} else {
-				rms.setDt_real_estm(formatter.parse(real));
-			}
-
-			if (estimacliente.equals("")) {
-				rms.setEstimativa_cliente(null);
-			} else {
-				rms.setEstimativa_cliente(formatter.parse(estimacliente));
-			}
-
-			if (auxjornadas.equals("")) {
-				auxjornadas = "0";
-				jornadas = Integer.parseInt(auxjornadas);
-			} else {
-				jornadas = Integer.parseInt(auxjornadas);
-			}
-
-			if (auxpontos.equals("")) {
-				auxpontos = "0";
-				pontos = Integer.parseInt(auxpontos);
-			} else {
-				pontos = Integer.parseInt(auxpontos);
-			}
-
-			if (linhacap.equals("")) {
-				linhacap = "null";
-			}
-
-			if (inrms.equals("")) {
-				rms.setInicio_rms(null);
-			} else {
-				rms.setInicio_rms(formatter.parse(inrms));
-			}
-
-			if (fimrms.equals("")) {
-				rms.setFim_rms(null);
-			} else {
-				rms.setFim_rms(formatter.parse(fimrms));
-			}
-
-			if (aprms.equals("")) {
-				rms.setAprovacao_rms(null);
-			} else {
-				rms.setAprovacao_rms(formatter.parse(aprms));
-			}
-
-			if (indev.equals("")) {
-				rms.setInicio_dev(null);
-			} else {
-				rms.setInicio_dev(formatter.parse(indev));
-			}
-
-			if (fimdev.equals("")) {
-				rms.setFim_dev(null);
-			} else {
-				rms.setFim_dev(formatter.parse(fimdev));
-			}
-
-			if (inhomoeveris.equals("")) {
-				rms.setInicio_homo_everis(null);
-			} else {
-				rms.setInicio_homo_everis(formatter.parse(inhomoeveris));
-			}
-
-			if (fimhomoeveris.equals("")) {
-				rms.setFim_homo_everis(null);
-			} else {
-				rms.setFim_homo_everis(formatter.parse(fimhomoeveris));
-			}
-
-			if (datarelease.equals("")) {
-				rms.setDt_release(null);
-			} else {
-				rms.setDt_release(formatter.parse(datarelease));
-			}
-
-			if (inplanejamento.equals("")) {
-				rms.setInplanejamento(null);
-			} else {
-				rms.setInplanejamento(formatter.parse(inplanejamento));
-			}
-
-			if (fimplanejamento.equals("")) {
-				rms.setFimplanejamento(null);
-			} else {
-				rms.setFimplanejamento(formatter.parse(fimplanejamento));
-			}
-
-			if (esteira.equals("")) {
-				esteira = "null";
-			}
-
-			if (inhomovivo.equals("")) {
-				rms.setInicio_homo_vivo(null);
-			} else {
-				rms.setInicio_homo_vivo(formatter.parse(inhomovivo));
-			}
-
-			if (fimhomovivo.equals("")) {
-				rms.setFim_homo_vivo(null);
-			} else {
-				rms.setFim_homo_vivo(formatter.parse(fimhomovivo));
-			}
-
-			if (inpreprod.equals("")) {
-				rms.setInicio_preprod(null);
-			} else {
-				rms.setInicio_preprod(formatter.parse(inpreprod));
-			}
-
-			if (fimpreprod.equals("")) {
-				rms.setFim_preprod(null);
-			} else {
-				rms.setFim_preprod(formatter.parse(fimpreprod));
-			}
-
-			rms.setDono(dono);
-			rms.setId_Demanda(iddemanda);
-			rms.setDescricao_demanda(descdemanda);
-			rms.setTipo_demanda(tipodemanda);
-			rms.setSolicitante_vivo(solvivo);
-			rms.setAnal_resp(analresp);
-			rms.setJornadas(jornadas);
-			rms.setPontos(pontos);
-			rms.setSituacao_estimativa(situacao);
-			rms.setLinha_cap(linhacap);
-			rms.setAnalise_funcional(analfun);
-			rms.setEsteira(esteira);
-			rms.setDemanda(demanda);
-			Boolean retorno = daoGeneric.salvar(rms);
-
-			if (retorno) {
-				out.println("<!DOCTYPE html>");
-				out.println("<html>");
-				out.println("<head>");
-				out.println("<title> Servlet </title>");
-				out.println("</head>");
-				out.println("<body>");
-				out.println("<h1> Inserção Realizada com Sucesso!! '" + dono + "' '" + iddemanda + "' '" + "' '"
-						+ situacao + "' '" + analfun + "' </h1>");
-				out.println("</body>");
-				out.println("</html>");
-			} else {
-				out.println("<!DOCTYPE html>");
-				out.println("<html>");
-				out.println("<head>");
-				out.println("<title> Servlet </title>");
-				out.println("</head>");
-				out.println("<body>");
-				out.println("<h1> ERRO: Não foi possível inserir '" + esteira + "' '" + inhomovivo + "' '" + fimhomovivo
-						+ "' '" + inpreprod + "' '" + fimpreprod + "' '" + demanda + "'  </h1>");
-				out.println("</body>");
-				out.println("</html>");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}else {
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title> Servlet </title>");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h1> ERRO: RMS Já Cadastrado </h1>");
+			out.println("</body>");
+			out.println("</html>");
 		}
-
-	}
-
-	public DaoGeneric<Rms> getDaoGeneric() {
-		return daoGeneric;
-	}
-
-	public void setDaoGeneric(DaoGeneric<Rms> daoGeneric) {
-		this.daoGeneric = daoGeneric;
 	}
 
 }

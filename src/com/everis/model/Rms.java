@@ -2,6 +2,7 @@ package com.everis.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,9 @@ public class Rms {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 	private String dono;
-	private int id_Demanda;
+	
+	@Column(unique=true)
+	private String id_demanda;
 	private String descricao_demanda;
 	private String tipo_demanda;
 	private String solicitante_vivo;
@@ -88,8 +91,8 @@ public class Rms {
 		return dono;
 	}
 
-	public int getId_Demanda() {
-		return id_Demanda;
+	public String getId_Demanda() {
+		return id_demanda;
 	}
 
 	public String getDescricao_demanda() {
@@ -220,8 +223,8 @@ public class Rms {
 		this.dono = dono;
 	}
 
-	public void setId_Demanda(int id_Demanda) {
-		this.id_Demanda = id_Demanda;
+	public void setId_Demanda(String id_demanda) {
+		this.id_demanda = id_demanda;
 	}
 
 	public void setDescricao_demanda(String descricao_demanda) {

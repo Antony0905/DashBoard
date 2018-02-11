@@ -296,21 +296,23 @@
 								src="../../../global/portraits/5.jpg" alt="..."> <i></i>
 						</span>
 					</a>
-						<ul class="dropdown-menu" role="menu">
-							<li role="presentation"><a href="javascript:void(0)"
-								role="menuitem"><i class="icon md-account"
-									aria-hidden="true"></i> Profile</a></li>
-							<li role="presentation"><a href="javascript:void(0)"
-								role="menuitem"><i class="icon md-card" aria-hidden="true"></i>
-									Billing</a></li>
-							<li role="presentation"><a href="javascript:void(0)"
-								role="menuitem"><i class="icon md-settings"
-									aria-hidden="true"></i> Settings</a></li>
-							<li class="divider" role="presentation"></li>
-							<li role="presentation"><a href="javascript:void(0)"
-								role="menuitem"><i class="icon md-power" aria-hidden="true"></i>
-									Logout</a></li>
-						</ul></li>
+						
+					<ul class="dropdown-menu" role="menu">
+			              <li role="presentation">
+			                <a href="profile.jsp" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
+			              </li>
+			              <li role="presentation">
+			                <a href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Billing</a>
+			              </li>
+			              <li role="presentation">
+			                <a href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a>
+			              </li>
+			              <li class="divider" role="presentation"></li>
+			              <li role="presentation">
+			                <a href="../../../jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
+			              </li>
+            		</ul>
+						</li>
 					<li class="dropdown"><a data-toggle="dropdown"
 						href="javascript:void(0)" title="Notifications"
 						aria-expanded="false" data-animation="scale-up" role="button">
@@ -538,16 +540,16 @@
 			</a>
 				<ul class="site-menu-sub">
 					<li class="site-menu-item active"><a class="animsition-link"
-						href="../layouts/menu-collapsed.html"> <span
+						href="../layouts/menu-collapsed.jsp"> <span
 							class="site-menu-title">Nova Demanda</span>
 					</a></li>
 					<li class="site-menu-item"><a class="animsition-link"
-						href="../layouts/grids.html"> <span class="site-menu-title">Editar
-								Demanda</span>
+						href="../layouts/grids.jsp"> 
+						<span class="site-menu-title">Editar Demanda</span>
 					</a></li>
 
 					<li class="site-menu-item"><a class="animsition-link"
-						href="../layouts/layout-grid.html"> <span
+						href="../layouts/layout-grid.jsp"> <span
 							class="site-menu-title">Excluir Demanda</span>
 					</a></li>
 					<li class="site-menu-item"></li>
@@ -562,21 +564,16 @@
 				<ul class="site-menu-sub">
 
 					<li class="site-menu-item"><a class="animsition-link"
-						href="../pages/register.html"> <span class="site-menu-title">Novo
+						href="../pages/register.jsp"> <span class="site-menu-title">Novo
 								Usuário</span>
 					</a></li>
 
 					<li class="site-menu-item"><a class="animsition-link"
-						href="../pages/register-v2.html"> <span
-							class="site-menu-title">Novo Gerente</span>
+						href="../pages/login.jsp"> <span class="site-menu-title">Login</span>
 					</a></li>
 
 					<li class="site-menu-item"><a class="animsition-link"
-						href="../pages/login.html"> <span class="site-menu-title">Login</span>
-					</a></li>
-
-					<li class="site-menu-item"><a class="animsition-link"
-						href="../pages/profile.html"> <span class="site-menu-title">Perfil</span>
+						href="../pages/profile.jsp"> <span class="site-menu-title">Perfil</span>
 					</a></li>
 
 
