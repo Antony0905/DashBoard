@@ -553,13 +553,6 @@
               <span class="site-menu-title">Novo Usuário</span>
             </a>
           </li>
-
-          <li class="site-menu-item">
-            <a class="animsition-link" href="../pages/register-v2.jsp">
-              <span class="site-menu-title">Novo Gerente</span>
-            </a>
-          </li>
-
           <li class="site-menu-item">
             <a class="animsition-link" href="../pages/login.jsp">
               <span class="site-menu-title">Login</span>

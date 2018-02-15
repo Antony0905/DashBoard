@@ -1,5 +1,5 @@
 package com.everis.servlets.controller;
- 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,15 +13,20 @@ import com.everis.model.Rms;
 
 public class ExcluirRms extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
+
 	public ExcluirRms() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		Rms rms = new Rms();
 		String idDemanda = request.getParameter("idDemanda");
@@ -29,15 +34,6 @@ public class ExcluirRms extends HttpServlet {
 		boolean retorno = daoGeneric.removePorId(rms, idDemanda);
 
 		if (retorno) {
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title> Servlet </title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1> Sucesso </h1>");
-			out.println("</body>");
-			out.println("</html>");
 			response.sendRedirect("mmenu/html/pages/profile.jsp");
 		} else {
 			out.println("<!DOCTYPE html>");
@@ -50,12 +46,6 @@ public class ExcluirRms extends HttpServlet {
 			out.println("</body>");
 			out.println("</html>");
 		}
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 	}
 
 }

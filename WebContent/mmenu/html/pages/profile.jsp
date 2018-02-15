@@ -62,6 +62,12 @@
 	Breakpoints();
 	
 </script>
+
+<script type="text/javascript">
+	function setarIdNoModal(id){
+		document.getElementById('idDemanda').value = id;
+	}
+</script>
 </head>
 <body class="site-navbar-small page-profile">
 	<!--[if lt IE 8]>
@@ -581,7 +587,7 @@
 																<td><% out.println(rms.getDemanda()); %></td>
 																<td><a href="../../../UpdateRms?idDemanda=<%out.println(rms.getId_Demanda());%>"><img src="../../../global/img/view.png" title="View"/></a></td>
 																<td><a href="../../../BuscarRms?idDemanda=<%out.println(rms.getId_Demanda());%>"><img src="../../../global/img/refresh.png"title="Update"/></a></td>
-																<td><img src="../../../global/img/x.png" title="Remove" data-toggle="modal" data-target="#exampleModal"/></a></td>
+																<td><img onclick="setarIdNoModal('<%out.print(rms.getId_Demanda()); %>')" src="../../../global/img/x.png" title="Remove" data-toggle="modal" data-target="#modalConfirmacaoExclusao" style="cursor: pointer;"/></td>
 															</tr>	
 														<% } %>
 													</tbody>
@@ -719,21 +725,24 @@
 					</div>
 					<!-- End Panel -->
 					<!-- Modal -->
-					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">Atenção!</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
+					<div class="modal fade" id="modalConfirmacaoExclusao" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document" style="width: 300px; margin-top: 15%;">
+					    <div class="modal-content" style="width: 300px;">
+					      <div class="modal-header" style="background-color: #3f51b5">
+					        <h5 class="modal-title" id="exampleModalLabel" style="width: 200px; float: left; font-size: 20px;color: white; font-weight: bold;">Atenção!</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="float: right;">
+					          <span aria-hidden="true" style="color: white;font-weight: bold;">&times;</span>
 					        </button>
 					      </div>
-					      <div class="modal-body">
-					        Deseja realmente excluir a demanda 
+					      <div class="modal-body" style="color: red ;font-weight: bold; text-align: center;">
+					        Você realmente deseja Remover?
 					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					        <button type="button" class="btn btn-primary">Save changes</button>
+					      <div class="modal-footer" style="text-align: center;">
+						      <form action="../../../ExcluirRms" method="POST" >
+						      	<input type="text" name="idDemanda" id="idDemanda" value="" hidden="true">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						        <button type="submit" class="btn btn-primary">Remover</button>
+						      </form>
 					      </div>
 					    </div>
 					  </div>
