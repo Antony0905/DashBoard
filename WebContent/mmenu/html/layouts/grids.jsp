@@ -684,17 +684,17 @@
                       <p class="grupo"> FASE DE ESTIMATIVA </p>
                   </div>
                   <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" readonly> </label>
+                  <label> Projeto <input type="text" name="projeto" id="projeto" readonly> </label>
                   <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" required > </label>
                   <label> Tipo da Demanda<select name="tipodemanda"> 
                   		<option name="pp" value="pp">PP</option>
                   		<option name="projeto" value="Projeto">Projeto</option>
                   </select>  </label>
-                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo"> </label> <br><br>
-				
-				
-                  <label> Analista Responsável <input type="text" name="analresp" id="analresp"> </label>
+                  <br><br>
+                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo"> </label> 				
+                  <label> Analista Responsável <input type="text" name="analresp" id="analresp"> </label> <br><br>
                   <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada"> </label> 
-                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega"></label> <br><br>
+                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega"></label>
                   <label> Data Estimada Real  <input type="date" name="real" id="real"></label> <br><br>
                   <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente"></label> 
                   
@@ -766,24 +766,24 @@
                       <p class="grupo"> FASE DE ESTIMATIVA </p>
                   </div>
                   <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" value="<%out.println(rms.getId_Demanda()); %>" readonly> </label>
+                  <label> Projeto <input type="text" name="projeto" id="projeto" value="<%out.println(rms.getProjeto()); %>" readonly> </label>
                   <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" value="<%out.println(rms.getDescricao_demanda()); %>" required > </label>
                   <%if(rms.getTipo_demanda().equals("pp")){ %>
                   <label> Tipo da Demanda<select name="tipodemanda"> 
                   		<option name="pp" value="pp" selected="selected">PP</option>
                   		<option name="projeto" value="Projeto">Projeto</option>
                   </select>  </label>
+                  <br><br>
                   <% }else{%>
                   <label> Tipo da Demanda<select name="tipodemanda"> 
                   		<option name="pp" value="pp">PP</option>
                   		<option name="projeto" value="Projeto" selected="selected">Projeto</option>
                   </select>  </label>
                   <%} %>
-                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo" value="<%out.println(rms.getSolicitante_vivo()); %>"> </label> <br><br>
-				
-				
-                  <label> Analista Responsável <input type="text" name="analresp" id="analresp" value="<%out.println(rms.getAnal_resp()); %>"> </label>
+                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo" value="<%out.println(rms.getSolicitante_vivo()); %>"> </label>				
+                  <label> Analista Responsável <input type="text" name="analresp" id="analresp" value="<%out.println(rms.getAnal_resp()); %>"> </label><br><br>
                   <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada" value="<%out.print(rms.getDt_entrada_estimada());%>" /> </label> 
-                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega" value="<%out.print(rms.getDt_entrega_estm());%>"/></label> <br><br>
+                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega" value="<%out.print(rms.getDt_entrega_estm());%>"/></label> 
                   <label> Data Estimada Real  <input type="date" name="real" id="real" value="<%out.print(rms.getDt_real_estm());%>"/></label> <br><br>
                   <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente" value="<%out.print(rms.getEstimativa_cliente());%>"></label> 
                   

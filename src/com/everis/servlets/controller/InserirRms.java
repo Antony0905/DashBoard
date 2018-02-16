@@ -41,6 +41,7 @@ public class InserirRms extends HttpServlet {
 
 		String idDemanda = request.getParameter("iddemanda");
 		String dono = (String) session.getAttribute("user");
+		String projeto = request.getParameter("projeto");
 		String descdemanda = request.getParameter("descdemanda");
 		String tipodemanda = request.getParameter("tipodemanda");
 		String solvivo = request.getParameter("solvivo");
@@ -216,6 +217,7 @@ public class InserirRms extends HttpServlet {
 				}
 
 				rms.setDono(dono);
+				rms.setProjeto(projeto);
 				rms.setId_Demanda(idDemanda);
 				rms.setDescricao_demanda(descdemanda);
 				rms.setTipo_demanda(tipodemanda);

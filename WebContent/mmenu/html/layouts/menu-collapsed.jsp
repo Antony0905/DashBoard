@@ -705,17 +705,17 @@
                       <p class="grupo"> FASE DE ESTIMATIVA </p>
                   </div>
                   <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" required> </label>
+                  <label> Projeto <input type="text" name="projeto" id="projeto" required> </label>
                   <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" required > </label>
                   <label> Tipo da Demanda<select name="tipodemanda"> 
                   		<option name="pp" value="pp">PP</option>
                   		<option name="projeto" value="Projeto">Projeto</option>
                   </select>  </label>
-                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo"> </label> <br><br>
-				
-				
-                  <label> Analista Responsável <input type="text" name="analresp" id="analresp"> </label>
+                  <br><br>
+                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo"> </label> 			
+                  <label> Analista Responsável <input type="text" name="analresp" id="analresp"> </label> <br><br>
                   <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada"> </label> 
-                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega"></label> <br><br>
+                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega"></label> 
                   <label> Data Estimada Real  <input type="date" name="real" id="real"></label> <br><br>
                   <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente"></label> 
                   

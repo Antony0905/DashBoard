@@ -24,6 +24,7 @@ public class Rms {
 	
 	@Column(unique=true)
 	private String id_demanda;
+	private String projeto;
 	private String descricao_demanda;
 	private String tipo_demanda;
 	private String solicitante_vivo;
@@ -343,4 +344,13 @@ public class Rms {
 		this.demanda = demanda;
 	}
 
+	public String getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(String projeto) {
+		this.projeto = projeto;
+	}
+
+	
 }

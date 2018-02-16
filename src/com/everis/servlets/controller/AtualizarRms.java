@@ -40,7 +40,8 @@ public class AtualizarRms extends HttpServlet {
 		String iddemanda = request.getParameter("iddemanda");
 		
 		rms = daoGeneric.buscarRmsObjectPorId(Rms.class, iddemanda);	
-
+		
+		String projeto = request.getParameter("projeto");
 		String descdemanda = request.getParameter("descdemanda");
 		String tipodemanda = request.getParameter("tipodemanda");
 		String solvivo = request.getParameter("solvivo");
@@ -215,6 +216,7 @@ public class AtualizarRms extends HttpServlet {
 
 			rms.setDono(dono);
 			rms.setId_Demanda(iddemanda);
+			rms.setProjeto(projeto);
 			rms.setDescricao_demanda(descdemanda);
 			rms.setTipo_demanda(tipodemanda);
 			rms.setSolicitante_vivo(solvivo);

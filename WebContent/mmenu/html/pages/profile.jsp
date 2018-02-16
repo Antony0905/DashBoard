@@ -561,6 +561,7 @@
 														<tr>
 															<td><% out.println(nome); %></td>															
 															<td>ID Demanda </td>
+															<td>Projeto </td>
 															<td>Descrição</td>
 															<td>Esteira</td>
 															<td>Data Release</td>
@@ -581,6 +582,7 @@
 															<tr>
 																<td><%out.println(j);%></td>
 																<td><% out.println(rms.getId_Demanda()); %></td>
+																<td><% out.println(rms.getProjeto()); %></td>
 																<td><% out.println(rms.getDescricao_demanda()); %></td>
 																<td><% out.println(rms.getEsteira()); %></td>
 																<td><% out.println(rms.getDt_release()); %></td>
@@ -734,7 +736,7 @@
 					          <span aria-hidden="true" style="color: white;font-weight: bold;">&times;</span>
 					        </button>
 					      </div>
-					      <div class="modal-body" style="color: red ;font-weight: bold; text-align: center;">
+					      <div class="modal-body" style="color:black;font-weight:bold;text-align:center">
 					        Você realmente deseja Remover?
 					      </div>
 					      <div class="modal-footer" style="text-align: center;">
