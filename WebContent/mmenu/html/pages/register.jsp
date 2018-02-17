@@ -40,6 +40,7 @@
 	href="../../../global/fonts/material-design/material-design.min.css">
 <link rel="stylesheet"
 	href="../../../global/fonts/brand-icons/brand-icons.min.css">
+<link rel="stylesheet" href="../../../global/mycss/index.css">
 <!--[if lt IE 9]>
     <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -114,11 +115,6 @@
 						class="icon icon-fullscreen" data-toggle="fullscreen" href="#"
 						role="button"> <span class="sr-only">Toggle fullscreen</span>
 					</a></li>
-					<li class="hidden-float"><a class="icon md-search"
-						data-toggle="collapse" href="#" data-target="#site-navbar-search"
-						role="button"> <span class="sr-only">Toggle Search</span>
-					</a></li>
-
 					<ul class="dropdown-menu" role="menu">
 						<li role="presentation">
 							<div class="mega-content">
@@ -265,8 +261,19 @@
 				</ul>
 				<!-- End Navbar Toolbar -->
 				<!-- Navbar Toolbar Right -->
-				<ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-					<li class="dropdown"></a>
+				<ul class="nav navbar-toolbar navbar-right navbar-toolbar-right" style="padding-right: 20px;">
+					        <li class="h1">
+		             <% String nome = (String) session.getAttribute("user"); 
+											            if(nome != null){
+											            %> <p class="h1user">	<% out.print("Bem vindo " + nome); %> </p>
+											            <%}else{
+											            	%> <p class="h2user"> <% out.print("Usuário Não Logado");  %> </p>
+						          </li>
+		          <a href="../pages/login.jsp"><img src="../../../global/img/login.png" style="padding-top: 15px;padding-right:5px;width: 140px;"/></a>  
+											            <% }%>
+		          </li>
+        		<ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+					<li class="dropdown" style="margin-right: 25px;">
 						<ul class="dropdown-menu" role="menu">
 							<li role="presentation"><a href="javascript:void(0)"
 								role="menuitem"> <span class="flag-icon flag-icon-gb"></span>
@@ -312,203 +319,13 @@
 			                <a href="../../../jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
 			              </li>
             		</ul>
-						</li>
-					<li class="dropdown"><a data-toggle="dropdown"
-						href="javascript:void(0)" title="Notifications"
-						aria-expanded="false" data-animation="scale-up" role="button">
-							<i class="icon md-notifications" aria-hidden="true"></i> <span
-							class="badge badge-danger up">5</span>
-					</a>
-						<ul class="dropdown-menu dropdown-menu-right dropdown-menu-media"
-							role="menu">
-							<li class="dropdown-menu-header" role="presentation">
-								<h5>NOTIFICATIONS</h5> <span
-								class="label label-round label-danger">New 5</span>
-							</li>
-							<li class="list-group" role="presentation">
-								<div data-role="container">
-									<div data-role="content">
-										<a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<i class="icon md-receipt bg-red-600 white icon-circle"
-														aria-hidden="true"></i>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">A new order has been placed</h6>
-													<time class="media-meta"
-														datetime="2015-06-12T20:50:48+08:00">5 hours ago</time>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<i class="icon md-account bg-green-600 white icon-circle"
-														aria-hidden="true"></i>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Completed the task</h6>
-													<time class="media-meta"
-														datetime="2015-06-11T18:29:20+08:00">2 days ago</time>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<i class="icon md-settings bg-red-600 white icon-circle"
-														aria-hidden="true"></i>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Settings updated</h6>
-													<time class="media-meta"
-														datetime="2015-06-11T14:05:00+08:00">2 days ago</time>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<i class="icon md-calendar bg-blue-600 white icon-circle"
-														aria-hidden="true"></i>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Event started</h6>
-													<time class="media-meta"
-														datetime="2015-06-10T13:50:18+08:00">3 days ago</time>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<i class="icon md-comment bg-orange-600 white icon-circle"
-														aria-hidden="true"></i>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Message received</h6>
-													<time class="media-meta"
-														datetime="2015-06-10T12:34:48+08:00">3 days ago</time>
-												</div>
-											</div>
-										</a>
-									</div>
-								</div>
-							</li>
-							<li class="dropdown-menu-footer" role="presentation"><a
-								class="dropdown-menu-footer-btn" href="javascript:void(0)"
-								role="button"> <i class="icon md-settings"
-									aria-hidden="true"></i>
-							</a> <a href="javascript:void(0)" role="menuitem"> All
-									notifications </a></li>
-						</ul></li>
-					<li class="dropdown"><a data-toggle="dropdown"
-						href="javascript:void(0)" title="Messages" aria-expanded="false"
-						data-animation="scale-up" role="button"> <i
-							class="icon md-email" aria-hidden="true"></i> <span
-							class="badge badge-info up">3</span>
-					</a>
-						<ul class="dropdown-menu dropdown-menu-right dropdown-menu-media"
-							role="menu">
-							<li class="dropdown-menu-header" role="presentation">
-								<h5>MESSAGES</h5> <span class="label label-round label-info">New
-									3</span>
-							</li>
-							<li class="list-group" role="presentation">
-								<div data-role="container">
-									<div data-role="content">
-										<a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-online"> <img
-														src="../../../global/portraits/2.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Mary Adams</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-17T20:22:05+08:00">30
-															minutes ago</time>
-													</div>
-													<div class="media-detail">Anyways, i would like just
-														do it</div>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-off"> <img
-														src="../../../global/portraits/3.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Caleb Richards</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-17T12:30:30+08:00">12 hours
-															ago</time>
-													</div>
-													<div class="media-detail">I checheck the document.
-														But there seems</div>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-busy"> <img
-														src="../../../global/portraits/4.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">June Lane</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-16T18:38:40+08:00">2 days
-															ago</time>
-													</div>
-													<div class="media-detail">Lorem ipsum Id consectetur
-														et minim</div>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-away"> <img
-														src="../../../global/portraits/5.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Edward Fletcher</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-15T20:34:48+08:00">3 days
-															ago</time>
-													</div>
-													<div class="media-detail">Dolor et irure cupidatat
-														commodo nostrud nostrud.</div>
-												</div>
-											</div>
-										</a>
-									</div>
-								</div>
-							</li>
-							<li class="dropdown-menu-footer" role="presentation"><a
-								class="dropdown-menu-footer-btn" href="javascript:void(0)"
-								role="button"> <i class="icon md-settings"
-									aria-hidden="true"></i>
-							</a> <a href="javascript:void(0)" role="menuitem"> See all
-									messages </a></li>
-						</ul></li>
-
-				</ul>
+				</li>
+			</ul>
 				<!-- End Navbar Toolbar Right -->
 			</div>
 			<!-- End Navbar Collapse -->
 			<!-- Site Navbar Seach -->
-			<div class="collapse navbar-search-overlap" id="site-navbar-search">
+			<div class="collapse navbar-search-overlap" id="site-navbar-search" >
 				<form role="search">
 					<div class="form-group">
 						<div class="input-search">
@@ -535,30 +352,30 @@
 			<li class="site-menu-item has-sub active"><a
 				href="javascript:void(0)"> <i
 					class="site-menu-icon md-view-compact" aria-hidden="true"></i> <span
-					class="site-menu-title">Cadastrar Demanda</span> <span
+					class="site-menu-title">Opções de Projeto</span> <span
 					class="site-menu-arrow"></span>
 			</a>
 				<ul class="site-menu-sub">
 					<li class="site-menu-item active"><a class="animsition-link"
 						href="../layouts/menu-collapsed.jsp"> <span
-							class="site-menu-title">Nova Demanda</span>
+							class="site-menu-title">Novo Projeto</span>
 					</a></li>
 					<li class="site-menu-item"><a class="animsition-link"
 						href="../layouts/grids.jsp"> 
-						<span class="site-menu-title">Editar Demanda</span>
+						<span class="site-menu-title">Editar Projeto</span>
 					</a></li>
-
-					<li class="site-menu-item"><a class="animsition-link"
-						href="../layouts/layout-grid.jsp"> <span
-							class="site-menu-title">Excluir Demanda</span>
-					</a></li>
+				  <li class="site-menu-item">
+			          <a class="animsition-link" href="../layouts/view.jsp">
+			            <span class="site-menu-title">Visualizar Projeto</span>
+			          </a>
+			      </li>
 					<li class="site-menu-item"></li>
 				</ul></li>
 
 
 			<li class="site-menu-item has-sub"><a href="javascript:void(0)">
-					<i class="site-menu-icon md-google-pages" aria-hidden="true"></i> <span
-					class="site-menu-title">Cadastrar Usuário</span> <span
+					<i class="icon md-account grey-600 font-size-20 vertical-align-bottom" aria-hidden="true" style="margin-bottom: 13px;margin-right: 17px;"></i> <span
+					class="site-menu-title">Opções de Usuário</span> <span
 					class="site-menu-arrow"></span>
 			</a>
 				<ul class="site-menu-sub">

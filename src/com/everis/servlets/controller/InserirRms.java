@@ -42,6 +42,7 @@ public class InserirRms extends HttpServlet {
 		String idDemanda = request.getParameter("iddemanda");
 		String dono = (String) session.getAttribute("user");
 		String projeto = request.getParameter("projeto");
+		int progresso = Integer.parseInt(request.getParameter("progresso"));
 		String descdemanda = request.getParameter("descdemanda");
 		String tipodemanda = request.getParameter("tipodemanda");
 		String solvivo = request.getParameter("solvivo");
@@ -77,7 +78,7 @@ public class InserirRms extends HttpServlet {
 		rmsJaCadastrada = daoGeneric.verificarSeRmsJaEstaCadastrada(Rms.class, idDemanda);
 		if (rmsJaCadastrada == false) {
 			try {
-
+				
 				if (solvivo.equals("")) {
 					solvivo = "null";
 				}
@@ -218,6 +219,7 @@ public class InserirRms extends HttpServlet {
 
 				rms.setDono(dono);
 				rms.setProjeto(projeto);
+				rms.setProgresso(progresso);
 				rms.setId_Demanda(idDemanda);
 				rms.setDescricao_demanda(descdemanda);
 				rms.setTipo_demanda(tipodemanda);

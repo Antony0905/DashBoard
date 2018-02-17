@@ -21,10 +21,11 @@ public class Rms {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 	private String dono;
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	private String id_demanda;
 	private String projeto;
+	private int progresso;
 	private String descricao_demanda;
 	private String tipo_demanda;
 	private String solicitante_vivo;
@@ -352,5 +353,12 @@ public class Rms {
 		this.projeto = projeto;
 	}
 
-	
+	public int getProgresso() {
+		return progresso;
+	}
+
+	public void setProgresso(int progresso) {
+		this.progresso = progresso;
+	}
+
 }

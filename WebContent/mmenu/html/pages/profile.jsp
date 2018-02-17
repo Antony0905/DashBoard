@@ -48,6 +48,7 @@
 	href="../../../global/fonts/material-design/material-design.min.css">
 <link rel="stylesheet"
 	href="../../../global/fonts/brand-icons/brand-icons.min.css">
+<link rel="stylesheet" href="../../../global/mycss/index.css">
 <!--[if lt IE 9]>
     <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -115,10 +116,6 @@
 					<li class="hidden-xs" id="toggleFullscreen"><a
 						class="icon icon-fullscreen" data-toggle="fullscreen" href="#"
 						role="button"> <span class="sr-only">Toggle fullscreen</span>
-					</a></li>
-					<li class="hidden-float"><a class="icon md-search"
-						data-toggle="collapse" href="#" data-target="#site-navbar-search"
-						role="button"> <span class="sr-only">Toggle Search</span>
 					</a></li>
 					<ul class="dropdown-menu" role="menu">
 						<li role="presentation">
@@ -266,8 +263,20 @@
 				</ul>
 				<!-- End Navbar Toolbar -->
 				<!-- Navbar Toolbar Right -->
-				<ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-					<li class="dropdown"><a class="navbar-avatar dropdown-toggle"
+				<ul class="nav navbar-toolbar navbar-right navbar-toolbar-right" style="padding-right: 20px;">
+			        <li class="h1">
+			             <% String nome = (String) session.getAttribute("user"); 
+												            if(nome != null){
+												            %> <p class="h1user">	<% out.print("Bem vindo " + nome); %> </p>
+												            <%}else{
+												            	%> <p class="h2user"> <% out.print("Usuário Não Logado");  %> </p>
+							          </li>
+			          <a href="../pages/login.jsp"><img src="../../../global/img/login.png" style="padding-top: 15px;padding-right:5px;width: 140px;"/></a>  
+												            <% }%>
+			          </li>
+			        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+					<li class="dropdown" style="margin-right: 25px;">
+					<a class="navbar-avatar dropdown-toggle"
 						data-toggle="dropdown" href="#" aria-expanded="false"
 						data-animation="scale-up" role="button"> <span
 							class="avatar avatar-online"> <img
@@ -290,106 +299,6 @@
 		              </li>
 		            </ul>
             		</li>
-					<li class="dropdown"><a data-toggle="dropdown"
-						href="javascript:void(0)" title="Notifications"
-						aria-expanded="false" data-animation="scale-up" role="button">
-							<i class="icon md-notifications" aria-hidden="true"></i> <span
-							class="badge badge-danger up">4</span>
-					</a></li>
-					<li class="dropdown"><a data-toggle="dropdown"
-						href="javascript:void(0)" title="Messages" aria-expanded="false"
-						data-animation="scale-up" role="button"> <i
-							class="icon md-email" aria-hidden="true"></i> <span
-							class="badge badge-info up">3</span>
-					</a>
-						<ul class="dropdown-menu dropdown-menu-right dropdown-menu-media"
-							role="menu">
-							<li class="list-group" role="presentation">
-								<div data-role="container">
-									<div data-role="content">
-										<a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-online"> <img
-														src="../../../global/portraits/2.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Mary Adams</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-17T20:22:05+08:00">30
-															minutes ago</time>
-													</div>
-													<div class="media-detail">Anyways, i would like just
-														do it</div>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-off"> <img
-														src="../../../global/portraits/3.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Caleb Richards</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-17T12:30:30+08:00">12 hours
-															ago</time>
-													</div>
-													<div class="media-detail">I checheck the document.
-														But there seems</div>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-busy"> <img
-														src="../../../global/portraits/4.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">June Lane</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-16T18:38:40+08:00">2 days
-															ago</time>
-													</div>
-													<div class="media-detail">Lorem ipsum Id consectetur
-														et minim</div>
-												</div>
-											</div>
-										</a> <a class="list-group-item" href="javascript:void(0)"
-											role="menuitem">
-											<div class="media">
-												<div class="media-left padding-right-10">
-													<span class="avatar avatar-sm avatar-away"> <img
-														src="../../../global/portraits/5.jpg" alt="..." /> <i></i>
-													</span>
-												</div>
-												<div class="media-body">
-													<h6 class="media-heading">Edward Fletcher</h6>
-													<div class="media-meta">
-														<time datetime="2015-06-15T20:34:48+08:00">3 days
-															ago</time>
-													</div>
-													<div class="media-detail">Dolor et irure cupidatat
-														commodo nostrud nostrud.</div>
-												</div>
-											</div>
-										</a>
-									</div>
-								</div>
-							</li>
-							<li class="dropdown-menu-footer" role="presentation"><a
-								class="dropdown-menu-footer-btn" href="javascript:void(0)"
-								role="button"> <i class="icon md-settings"
-									aria-hidden="true"></i>
-							</a> <a href="javascript:void(0)" role="menuitem"> See all
-									messages </a></li>
-						</ul></li>
 				</ul>
 				<!-- End Navbar Toolbar Right -->
 			</div>
@@ -420,27 +329,28 @@
 			</a></li>
 			<li class="site-menu-item has-sub"><a href="javascript:void(0)">
 					<i class="site-menu-icon md-view-compact" aria-hidden="true"></i> <span
-					class="site-menu-title">Cadastrar Demanda</span> <span
+					class="site-menu-title">Opções de Projeto</span> <span
 					class="site-menu-arrow"></span>
 			</a>
 				<ul class="site-menu-sub">
 					<li class="site-menu-item"><a class="animsition-link"
 						href="../layouts/menu-collapsed.jsp"> <span
-							class="site-menu-title">Nova Demanda</span>
+							class="site-menu-title">Novo Projeto</span>
 					</a></li>
 					<li class="site-menu-item"><a class="animsition-link"
 						href="../layouts/grids.jsp"> <span class="site-menu-title">Editar
-								Demanda</span>
+								Projeto</span>
 					</a></li>
-					<li class="site-menu-item"><a class="animsition-link"
-						href="../layouts/layout-grid.jsp"> <span
-							class="site-menu-title">Excluir Demanda</span>
-					</a></li>
+					<li class="site-menu-item">
+			          <a class="animsition-link" href="../layouts/view.jsp">
+			            <span class="site-menu-title">Visualizar Projeto</span>
+			          </a>
+			        </li>
 				</ul></li>
 			<li class="site-menu-item has-sub active"><a
-				href="javascript:void(0)"> <i
-					class="site-menu-icon md-google-pages" aria-hidden="true"></i> <span
-					class="site-menu-title">Cadastrar Usuário</span> <span
+				href="javascript:void(0)"> 
+				<i class="icon md-account grey-600 font-size-20 vertical-align-bottom" aria-hidden="true" style="margin-bottom: 13px;margin-right: 17px;"></i> <span
+					class="site-menu-title">Opções de Usuário</span> <span
 					class="site-menu-arrow"></span>
 			</a>
 				<ul class="site-menu-sub">
@@ -518,9 +428,7 @@
 			<div class="row">
 				
 				<div class="col-md-9" style="width: 100%;">
-<% 
-	String nome = (String) session.getAttribute("user");
-	if(nome == null){
+<% if(nome == null){
 		nome = "";
 	}
 	DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
@@ -534,7 +442,6 @@
 								role="tablist">
 								<li class="active" role="presentation"><a data-toggle="tab"
 									href="#activities" aria-controls="activities" role="tab">Activities
-										<span class="badge badge-danger">3</span>
 								</a></li>
 								<li role="presentation"><a data-toggle="tab"
 									href="#profile" aria-controls="profile" role="tab">Profile</a></li>
@@ -559,10 +466,13 @@
 													<table id="tableProfile" style="width: 100%;">
 													<thead>
 														<tr>
-															<td><% out.println(nome); %></td>															
 															<td>ID Demanda </td>
 															<td>Projeto </td>
-															<td>Descrição</td>
+															<td></td>
+															<td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+																Descrição</td>
+															<td></td>
+															<td></td>
 															<td>Esteira</td>
 															<td>Data Release</td>
 															<td>Status</td>
@@ -574,16 +484,13 @@
 													<tbody>
 														
 															<%	
-														int j = 0;
 														for(int i = 0; i < listaRms.size(); i++){
 															Rms rms = (Rms) listaRms.get(i);
-													 		j++;
 															%>
 															<tr>
-																<td><%out.println(j);%></td>
 																<td><% out.println(rms.getId_Demanda()); %></td>
 																<td><% out.println(rms.getProjeto()); %></td>
-																<td><% out.println(rms.getDescricao_demanda()); %></td>
+																<td colspan="4"><% out.println(rms.getDescricao_demanda()); %></td>
 																<td><% out.println(rms.getEsteira()); %></td>
 																<td><% out.println(rms.getDt_release()); %></td>
 																<td><% out.println(rms.getDemanda()); %></td>

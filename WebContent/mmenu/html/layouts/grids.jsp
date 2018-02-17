@@ -33,6 +33,7 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="../../../global/fonts/material-design/material-design.min.css">
   <link rel="stylesheet" href="../../../global/fonts/brand-icons/brand-icons.min.css">
+  <link rel="stylesheet" href="../../../global/mycss/index.css">
   <!--[if lt IE 9]>
     <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -68,6 +69,10 @@
         	document.getElementById("hidden2").style.display ="none";
         }
     }
+  	
+ 	function sliderChange(val) {
+		document.getElementById('sliderStatus').innerHTML = val;
+	}
   </script>
 </head>
 
@@ -115,12 +120,6 @@
           <li class="hidden-xs" id="toggleFullscreen">
             <a class="icon icon-fullscreen" data-toggle="fullscreen" href="#" role="button">
               <span class="sr-only">Toggle fullscreen</span>
-            </a>
-          </li>
-          <li class="hidden-float">
-            <a class="icon md-search" data-toggle="collapse" href="#" data-target="#site-navbar-search"
-            role="button">
-              <span class="sr-only">Toggle Search</span>
             </a>
           </li>
             <ul class="dropdown-menu" role="menu">
@@ -286,8 +285,19 @@
         </ul>
         <!-- End Navbar Toolbar -->
         <!-- Navbar Toolbar Right -->
+        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right" style="padding-right: 20px;">
+        <li class="h1">
+             <% String nome = (String) session.getAttribute("user"); 
+									            if(nome != null){
+									            %> <p class="h1user">	<% out.print("Bem vindo " + nome); %> </p>
+									            <%}else{
+									            	%> <p class="h2user"> <% out.print("Usuário Não Logado");  %> </p>
+				          </li>
+          <a href="../pages/login.jsp"><img src="../../../global/img/login.png" style="padding-top: 15px;padding-right:5px;width: 140px;"/></a>  
+									            <% }%>
+          </li>
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-          <li class="dropdown">
+          <li class="dropdown" style="margin-right: 25px;">
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
@@ -308,183 +318,6 @@
               <li class="divider" role="presentation"></li>
               <li role="presentation">
                 <a href="../../../jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <i class="icon md-notifications" aria-hidden="true"></i>
-              <span class="badge badge-danger up">5</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-              <li class="dropdown-menu-header" role="presentation">
-                <h5>NOTIFICATIONS</h5>
-                <span class="label label-round label-danger">New 5</span>
-              </li>
-              <li class="list-group" role="presentation">
-                <div data-role="container">
-                  <div data-role="content">
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">A new order has been placed</h6>
-                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">5 hours ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-account bg-green-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Completed the task</h6>
-                          <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">2 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-settings bg-red-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Settings updated</h6>
-                          <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">2 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Event started</h6>
-                          <time class="media-meta" datetime="2015-06-10T13:50:18+08:00">3 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-comment bg-orange-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Message received</h6>
-                          <time class="media-meta" datetime="2015-06-10T12:34:48+08:00">3 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li class="dropdown-menu-footer" role="presentation">
-                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                  <i class="icon md-settings" aria-hidden="true"></i>
-                </a>
-                <a href="javascript:void(0)" role="menuitem">
-                    All notifications
-                  </a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a data-toggle="dropdown" href="javascript:void(0)" title="Messages" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <i class="icon md-email" aria-hidden="true"></i>
-              <span class="badge badge-info up">3</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-              <li class="dropdown-menu-header" role="presentation">
-                <h5>MESSAGES</h5>
-                <span class="label label-round label-info">New 3</span>
-              </li>
-              <li class="list-group" role="presentation">
-                <div data-role="container">
-                  <div data-role="content">
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-online">
-                            <img src="../../../global/portraits/2.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Mary Adams</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-17T20:22:05+08:00">30 minutes ago</time>
-                          </div>
-                          <div class="media-detail">Anyways, i would like just do it</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-off">
-                            <img src="../../../global/portraits/3.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Caleb Richards</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-17T12:30:30+08:00">12 hours ago</time>
-                          </div>
-                          <div class="media-detail">I checheck the document. But there seems</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-busy">
-                            <img src="../../../global/portraits/4.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">June Lane</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-16T18:38:40+08:00">2 days ago</time>
-                          </div>
-                          <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-away">
-                            <img src="../../../global/portraits/5.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Edward Fletcher</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-15T20:34:48+08:00">3 days ago</time>
-                          </div>
-                          <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li class="dropdown-menu-footer" role="presentation">
-                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                  <i class="icon md-settings" aria-hidden="true"></i>
-                </a>
-                <a href="javascript:void(0)" role="menuitem">
-                    See all messages
-                  </a>
               </li>
             </ul>
           </li>
@@ -519,32 +352,32 @@
       <li class="site-menu-item has-sub active">
         <a href="javascript:void(0)">
           <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
-          <span class="site-menu-title">Cadastrar Demanda</span>
+          <span class="site-menu-title">Opções de Projeto</span>
           <span class="site-menu-arrow"></span>
         </a>
         <ul class="site-menu-sub">
           <li class="site-menu-item">
             <a class="animsition-link" href="../layouts/menu-collapsed.jsp">
-              <span class="site-menu-title">Nova Demanda</span>
+              <span class="site-menu-title">Novo Projeto</span>
             </a>
           </li>
 
           <li class="site-menu-item active">
             <a class="animsition-link" href="../layouts/grids.jsp">
-              <span class="site-menu-title">Editar Demanda</span>
+              <span class="site-menu-title">Editar Projeto</span>
             </a>
           </li>
-          <li class="site-menu-item">
-            <a class="animsition-link" href="../layouts/layout-grid.jsp">
-              <span class="site-menu-title">Excluir Demanda</span>
-            </a>
-          </li>
+	      <li class="site-menu-item">
+	          <a class="animsition-link" href="../layouts/view.jsp">
+	            <span class="site-menu-title">Visualizar Projeto</span>
+	          </a>
+	      </li>
         </ul>
       </li>
       <li class="site-menu-item has-sub">
         <a href="javascript:void(0)">
-          <i class="site-menu-icon md-google-pages" aria-hidden="true"></i>
-          <span class="site-menu-title">Cadastrar Usuário</span>
+          <i class="icon md-account grey-600 font-size-20 vertical-align-bottom" aria-hidden="true" style="margin-bottom: 13px;margin-right: 17px;"></i>
+          <span class="site-menu-title">Opções de Usuário</span>
           <span class="site-menu-arrow"></span>
         </a>
         <ul class="site-menu-sub">
@@ -660,105 +493,38 @@
 
 <div class="page animsition">
     <div class="page-header">
-      <h1 class="page-title">Editar Demanda</h1>
+      <h1 class="page-title" style="color:blue;font-weight: bold;">Editar Demanda</h1>
     </div>	
 
-        <div class="page-content">
+     <div class="page-content">
       <div class="panel">
         <div class="panel-heading">
 	        <div style="display: inline-flex;width: 100%;">
+	        <% List<Rms> listaRms = (List<Rms>) session.getAttribute("listaRms"); 
+	        if(!(listaRms == null || listaRms.isEmpty())){%>
 	          <h3 class="panel-title" style="width: 400px">Preencha o Formulário Abaixo</h3>
+	        <%} else{%>
+	        	<h3 class="panel-title" style="width: 400px">Pesquise por um projeto</h3>
+	        <%} %>
 	          <form class="panel-title" action="../../../BuscarRms" method="POST" style="width:100%; float: right;">
 	           	<div  style="float: right;">
-		          	<label> Buscar Demanda Por ID <input type="text" name="pesquisa" id="pesquisa" required="required"> </label>
+		          	<label> Buscar Projeto Por ID <input type="text" name="pesquisa" id="pesquisa" required="required"> </label>
 		          	<input type="submit" value="Pesquisar" name="pesquisar" id="pesquisar">
 	          	</div>
 	          </form>
 	        </div> 
 	        
-	        <% List<Rms> listaRms = (List<Rms>) session.getAttribute("listaRms"); 
-	        if(listaRms == null || listaRms.isEmpty()){%>
+	        <%if(listaRms == null || listaRms.isEmpty()){%>
           <form action="../../../InserirRms" method="post"> 
               <fieldset id="fildset">
-                  <div class="divgrupo">
-                      <p class="grupo"> FASE DE ESTIMATIVA </p>
+                  <div>
+                      <h1 style="font-weight: bold; color:blue;"> 
+                      	Nehum projeto foi selecionado! Busque por algum para edita-lo. 
+                      </h1>
+                      
+                      <img src="../../../global/img/projeto.png" style="float:right;"/>
                   </div>
-                  <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" readonly> </label>
-                  <label> Projeto <input type="text" name="projeto" id="projeto" readonly> </label>
-                  <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" required > </label>
-                  <label> Tipo da Demanda<select name="tipodemanda"> 
-                  		<option name="pp" value="pp">PP</option>
-                  		<option name="projeto" value="Projeto">Projeto</option>
-                  </select>  </label>
-                  <br><br>
-                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo"> </label> 				
-                  <label> Analista Responsável <input type="text" name="analresp" id="analresp"> </label> <br><br>
-                  <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada"> </label> 
-                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega"></label>
-                  <label> Data Estimada Real  <input type="date" name="real" id="real"></label> <br><br>
-                  <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente"></label> 
-                  
-                  
-                  <!--  Cada Jornada Equivale a 8 horas e cada ponto a 4 horas  --> 
-                  <label> Jornadas  <input type="number" name="jornadas" id="jornadas"></label> 
-                  <label> Pontos <input type="number" name="pontos" id="pontos"></label> <br><br>
-                  
-                  <!-- Se a situaÃ§Ã£o da demanda estiver em "APROVADA" deve aparecer o próximo formulário
-                  Caso for reprovada deve finalizar a demanda, demais opções permanecer em aberto-->
-                  <label>Situação da Estimativa <select name="situacao" id="situacao" onchange="optionCheck()"> 
-                    <option name="aberta" value="aberta"> Aberta </option>
-                    <option name="andamento" value="andamento"> Em Andamento </option>
-                    <option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
-                    <option name="aprovada"  value="aprovada"> Aprovada </option>
-                    <option name="reprovada" value="reprovada"> Reprovada </option>
-                  </select> </label> <br><br>	
-                  
-                  <div id="hidden" style = "visibility:hidden; display:none;">
-                  <div class="divgrupo">
-                      <p class="grupo"> FASE DE DESENVOLVIMENTO </p>
-                  </div>
-
-                  <label> Linha CAP <input type="text" name="linhacap" id="linhacap"></label>
-                  <label> Início RMS v1 <input type="date" name="inrms" id="inrmsv1"></label>
-                  <label> Fim RMS v1 <input type="date" name="fimrms" id="fimrmsv1"></label> <br><br>
-                  <label> Aprovação RMS v1 <input type="date" name="aprms" id="aprmsv1"></label>
-                  <label> Início Dev <input type="date" name="indev" id="indev"></label>
-                  <label> Fim Dev <input type="date" name="fimdev" id="fimdev"></label> <br><br>
-                  <label> Início Homologação Everis <input type="date" name="inhomoeveris" id="inhomoeveris"></label>
-                  <label> Fim Homologação Everis <input type="date" name="fimhomoeveris" id="fimhomoeveris""></label> <br><br>
-                  <label> Data de Release <input type="date" name="datarelease" id="datarelease""></label>
-                  <label> Início Planejamento  <input type="date" name="inplanejamento" id="planejamento""></label>
-                  <label> Fim Planejamento  <input type="date" name="fimplanejamento" id="planejamento""></label>
-                  
-                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
-                    <option name="andamento" value="andamento"> Em Andamento </option>
-                    <option name="cancelado" value="cancelado"> Cancelado </option>
-                    <option name="finalizado" value="finalizado"> Finalizado </option>
-                    <option name="pendente" value="pendente"> Pendente Informação </option>
-                  </select> </label> <br><br>
-                  </div>				
-                    
-                  <div id="hidden2" style = "visibility:hidden; display:none;">
-                  <div class="divgrupo">
-                      <p class="grupo"> FASE DE HOMOLOGAÇÃO </p>
-                  </div>
-                  
-                  <label> Esteira <input type="text" name="esteira" id="esteira"></label>
-                  <label> Início Homologação VIVO <input type="date" name="inhomovivo" id="inhomovivo"></label>
-                  <label> Fim Homologação VIVO <input type="date" name="fimhomovivo" id="fimhomovivo"></label> <br><br>
-                  <label> Início Pré-Prod <input type="date" name="inpreprod" id="inpreprod"></label>
-                  <label> Fim Pré-Prod <input type="date" name="fimpreprod" id="fimpreprod"></label>
-				  <label> Demanda <select name="demanda" id="demanda">
-				  	<option name="andamento" value="andamento"> Em Andamento </option>
-				  	<option name="concluido" value="concluido"> Concluída </option>
-				  	<option name="cancelada" value="cancelada"> Cancelada </option>
-				  </select></label>  <br><br> 
-				  </div>
-                  <input type="submit" value="Cadastrar" id="submit"> 
-                  <input type="reset" value="Limpar">
-              </fieldset>
-          </form>
-          <% }else{ 
+                            <% }else{ 
           Rms rms = listaRms.get(0);%>
           <form action="../../../AtualizarRms" method="post"> 
               <fieldset id="fildset">
@@ -769,6 +535,10 @@
                   <label> Projeto <input type="text" name="projeto" id="projeto" value="<%out.println(rms.getProjeto()); %>" readonly> </label>
                   <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" value="<%out.println(rms.getDescricao_demanda()); %>" required > </label>
                   <%if(rms.getTipo_demanda().equals("pp")){ %>
+                  <label style="padding-left: 100px;">
+                  	Progresso:&nbsp<span id="sliderStatus"> <%out.print(rms.getProgresso());%></span> % 
+                  	<input type="range" id="range" name="progresso" min="0" max="100" value="<%out.print(rms.getProgresso());%>" step="10" onchange="sliderChange(this.value)">
+                  </label>
                   <label> Tipo da Demanda<select name="tipodemanda"> 
                   		<option name="pp" value="pp" selected="selected">PP</option>
                   		<option name="projeto" value="Projeto">Projeto</option>
@@ -863,25 +633,49 @@
                   <label> Fim Homologação VIVO <input type="date" name="fimhomovivo" id="fimhomovivo" value="<%out.print(rms.getFim_homo_vivo());%>"></label> <br><br>
                   <label> Início Pré-Prod <input type="date" name="inpreprod" id="inpreprod" value="<%out.print(rms.getInicio_preprod());%>"></label>
                   <label> Fim Pré-Prod <input type="date" name="fimpreprod" id="fimpreprod" value="<%out.print(rms.getFim_preprod());%>"></label>
-				  <%if(rms.getDemanda().equals("andamento")){ %>
+				  <%if(rms.getDemanda().equals("estimando")){ %>
 				  <label> Demanda <select name="demanda" id="demanda">
-				  	<option name="andamento" value="andamento" selected="selected"> Em Andamento </option>
-				  	<option name="concluido" value="concluido"> Concluída </option>
-				  	<option name="cancelada" value="cancelada"> Cancelada </option>
+				  	<option name="estimando" value="estimando" selected="selected"> Estimando </option>
+				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
+				  	<option name="homologando" value="homologando"> Homologando </option>
+				  	<option name="concluido" value="concluido"> Concluído </option>
+				  	<option name="cancelado" value="cancelado"> Cancelado </option>
+				  </select></label>  <br><br> 
+				  <%}%>
+				  <%if(rms.getDemanda().equals("desenvolvendo")){ %>
+				  <label> Demanda <select name="demanda" id="demanda">
+				  	<option name="estimando" value="estimando"> Estimando </option>
+				  	<option name="desenvolvendo" value="desenvolvendo" selected="selected"> Desenvolvendo </option>
+				  	<option name="homologando" value="homologando"> Homologando </option>
+				  	<option name="concluido" value="concluido"> Concluído </option>
+				  	<option name="cancelado" value="cancelado"> Cancelado </option>
+				  </select></label>  <br><br> 
+				  <%}%>
+				  <%if(rms.getDemanda().equals("homologando")){ %>
+				  <label> Demanda <select name="demanda" id="demanda">
+				  	<option name="estimando" value="estimando"> Estimando </option>
+				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
+				  	<option name="homologando" value="homologando" selected="selected"> Homologando </option>
+				  	<option name="concluido" value="concluido"> Concluído </option>
+				  	<option name="cancelado" value="cancelado"> Cancelado </option>
 				  </select></label>  <br><br> 
 				  <%}%>
 				  <%if(rms.getDemanda().equals("concluido")){ %>
 				  <label> Demanda <select name="demanda" id="demanda">
-				  	<option name="andamento" value="andamento" > Em Andamento </option>
-				  	<option name="concluido" value="concluido" selected="selected"> Concluída </option>
-				  	<option name="cancelada" value="cancelada"> Cancelada </option>
+				  	<option name="estimando" value="estimando"> Estimando </option>
+				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
+				  	<option name="homologando" value="homologando"> Homologando </option>
+				  	<option name="concluido" value="concluido" selected="selected"> Concluído </option>
+				  	<option name="cancelado" value="cancelado"> Cancelado </option>
 				  </select></label>  <br><br> 
 				  <%}%>
-				   <%if(rms.getDemanda().equals("cancelada")){ %>
+				   <%if(rms.getDemanda().equals("cancelado")){ %>
 				  <label> Demanda <select name="demanda" id="demanda">
-				  	<option name="andamento" value="andamento" > Em Andamento </option>
-				  	<option name="concluido" value="concluido" > Concluída </option>
-				  	<option name="cancelada" value="cancelada" selected="selected"> Cancelada </option>
+				  	<option name="estimando" value="estimando"> Estimando </option>
+				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
+				  	<option name="homologando" value="homologando"> Homologando </option>
+				  	<option name="concluido" value="concluido"> Concluído </option>
+				  	<option name="cancelado" value="cancelado" selected="selected"> Cancelado </option>
 				  </select></label>  <br><br> 
 				  <%}%>
 				  </div>

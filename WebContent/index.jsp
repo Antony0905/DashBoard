@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.everis.dao.DaoGeneric"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
@@ -99,13 +100,6 @@
               <span class="sr-only">Toggle fullscreen</span>
             </a>
           </li>
-          <li class="hidden-float">
-            <a class="icon md-search" data-toggle="collapse" href="#" data-target="#site-navbar-search"
-            role="button">
-              <span class="sr-only">Toggle Search</span>
-            </a>
-          </li>
- 
             <ul class="dropdown-menu" role="menu">
               <li role="presentation">
                 <div class="mega-content">
@@ -276,7 +270,7 @@
 									            <% }%>
           </li>
         <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-          <li class="dropdown">
+          <li class="dropdown" style="margin-right: 25px;">
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
@@ -297,183 +291,6 @@
               <li class="divider" role="presentation"></li>
               <li role="presentation">
                 <a href="jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <i class="icon md-notifications" aria-hidden="true"></i>
-              <span class="badge badge-danger up">5</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-              <li class="dropdown-menu-header" role="presentation">
-                <h5>NOTIFICATIONS</h5>
-                <span class="label label-round label-danger">New 5</span>
-              </li>
-              <li class="list-group" role="presentation">
-                <div data-role="container">
-                  <div data-role="content">
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">A new order has been placed</h6>
-                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">5 hours ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-account bg-green-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Completed the task</h6>
-                          <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">2 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-settings bg-red-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Settings updated</h6>
-                          <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">2 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Event started</h6>
-                          <time class="media-meta" datetime="2015-06-10T13:50:18+08:00">3 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-comment bg-orange-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Message received</h6>
-                          <time class="media-meta" datetime="2015-06-10T12:34:48+08:00">3 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li class="dropdown-menu-footer" role="presentation">
-                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                  <i class="icon md-settings" aria-hidden="true"></i>
-                </a>
-                <a href="javascript:void(0)" role="menuitem">
-                    All notifications
-                  </a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a data-toggle="dropdown" href="javascript:void(0)" title="Messages" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <i class="icon md-email" aria-hidden="true"></i>
-              <span class="badge badge-info up">3</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-              <li class="dropdown-menu-header" role="presentation">
-                <h5>MESSAGES</h5>
-                <span class="label label-round label-info">New 3</span>
-              </li>
-              <li class="list-group" role="presentation">
-                <div data-role="container">
-                  <div data-role="content">
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-online">
-                            <img src="global/portraits/2.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Mary Adams</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-17T20:22:05+08:00">30 minutes ago</time>
-                          </div>
-                          <div class="media-detail">Anyways, i would like just do it</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-off">
-                            <img src="global/portraits/3.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Caleb Richards</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-17T12:30:30+08:00">12 hours ago</time>
-                          </div>
-                          <div class="media-detail">I checheck the document. But there seems</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-busy">
-                            <img src="global/portraits/4.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">June Lane</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-16T18:38:40+08:00">2 days ago</time>
-                          </div>
-                          <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-away">
-                            <img src="global/portraits/5.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Edward Fletcher</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-15T20:34:48+08:00">3 days ago</time>
-                          </div>
-                          <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li class="dropdown-menu-footer" role="presentation">
-                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                  <i class="icon md-settings" aria-hidden="true"></i>
-                </a>
-                <a href="javascript:void(0)" role="menuitem">
-                    See all messages
-                  </a>
               </li>
             </ul>
           </li>
@@ -508,24 +325,24 @@
       <li class="site-menu-item has-sub">
         <a href="javascript:void(0)">
           <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
-          <span class="site-menu-title">Cadastrar Demanda</span>
+          <span class="site-menu-title">Opções de Projeto</span>
           <span class="site-menu-arrow"></span>
         </a>
         <ul class="site-menu-sub">
           <li class="site-menu-item">
             <a class="animsition-link" href="mmenu/html/layouts/menu-collapsed.jsp">
-              <span class="site-menu-title">Nova Demanda</span>
+              <span class="site-menu-title">Novo Projeto</span>
             </a>
           </li>
           <li class="site-menu-item">
             <a class="animsition-link" href="mmenu/html/layouts/grids.jsp">
-              <span class="site-menu-title">Editar Demanda</span>
+              <span class="site-menu-title">Editar Projeto</span>
             </a>
           </li>
 
           <li class="site-menu-item">
             <a class="animsition-link" href="mmenu/html/layouts/view.jsp">
-              <span class="site-menu-title">Visualizar Demanda</span>
+              <span class="site-menu-title">Visualizar Projeto</span>
             </a>
           </li>
 
@@ -533,8 +350,8 @@
       </li>
       <li class="site-menu-item has-sub">
         <a href="javascript:void(0)">
-          <i class="site-menu-icon md-google-pages" aria-hidden="true"></i>
-          <span class="site-menu-title">Cadastrar Usuário</span>
+          <i class="icon md-account grey-600 font-size-20 vertical-align-bottom" aria-hidden="true" style="margin-bottom: 13px;margin-right: 17px;"></i>
+          <span class="site-menu-title">Opções de Usuário</span>
           <span class="site-menu-arrow"></span>
         </a>
         <ul class="site-menu-sub">
@@ -644,12 +461,34 @@
       </div>
     </div>
   </div>
+  
+        <% 
+		DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
+		List<Rms> listaRms = new ArrayList<Rms>();
+		listaRms = daoGeneric.buscarRms(Rms.class, nome);
+		int concluido = 0;
+		int cancelado = 0;
+		int andamento = 0;
+		
+		for(int i = 0; i < listaRms.size(); i++){
+			Rms obj = listaRms.get(i);
+			if(obj.getDemanda().equals("concluido")){
+				concluido++;
+			}
+			if(obj.getDemanda().equals("cancelado")){
+				cancelado++;
+			}
+			if(obj.getDemanda().equals("andamento")||obj.getDemanda().equals("estimando")||obj.getDemanda().equals("homologando")){
+				andamento++;
+			}
+		}
+		
+		%>
   <!-- Page -->
   <div class="page animsition">
     <div class="page-content padding-30 container-fluid">
       <div class="row" data-plugin="matchHeight" data-by-row="true">
         <div class="col-lg-3 col-sm-6">
-        
         
           <!-- Widget Linearea One-->
            <div class="widget widget-shadow" id="widgetLineareaOne">
@@ -658,12 +497,12 @@
               
                 <div class="clearfix">
                   <div class="grey-800 pull-left padding-vertical-10">
-                    <i class="icon md-account grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>                    User
-                  </div>
-                  <span class="pull-right grey-700 font-size-30">1,253</span>
+                    <i class="icon md-account grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>Projetos <span style="color: #27d014;font-weight: bold;">Concluídos</span>
+                    </div>
+                  <span class="pull-right grey-700 font-size-30"><%out.print(concluido);%></span>
                 </div>
                 <div class="margin-bottom-20 grey-500">
-                  <i class="icon md-long-arrow-up green-500 font-size-16"></i>                  15% From this yesterday
+                  <i class="icon md-long-arrow-up green-500 font-size-16"></i> Possui uma boa média
                 </div>
                 <div class="ct-chart height-50"></div>
               </div>
@@ -678,12 +517,12 @@
               <div class="padding-20 padding-top-10">
                 <div class="clearfix">
                   <div class="grey-800 pull-left padding-vertical-10">
-                    <i class="icon md-flash grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>                    VISITS
+                    <i class="icon md-flash grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>Projetos em <span style="color: #6060e4;font-weight: bold;">Andamento</span>
                   </div>
-                  <span class="pull-right grey-700 font-size-30">2,425</span>
+                  <span class="pull-right grey-700 font-size-30"><%out.print(andamento);%></span>
             	    </div>
                 <div class="margin-bottom-20 grey-500">
-                  <i class="icon md-long-arrow-up green-500 font-size-16"></i>                  34.2% From this week
+                  <i class="icon md-long-arrow-up green-500 font-size-16"></i> Possui uma boa média
                 </div>
                 <div class="ct-chart height-50"></div>
               </div>
@@ -698,12 +537,12 @@
               <div class="padding-20 padding-top-10">
                 <div class="clearfix">
                   <div class="grey-800 pull-left padding-vertical-10">
-                    <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>                    Total Clicks
+                    <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom margin-right-5"></i> Projetos <span style="color: #dc1f1f;font-weight: bold;">Cancelados</span>
                   </div>
-                  <span class="pull-right grey-700 font-size-30">1,864</span>
+                  <span class="pull-right grey-700 font-size-30"><%out.print(cancelado);%></span>
                 </div>
                 <div class="margin-bottom-20 grey-500">
-                  <i class="icon md-long-arrow-down red-500 font-size-16"></i>                  15% From this yesterday
+                  <i class="icon md-long-arrow-down red-500 font-size-16"></i> Margem alta de projetos cancelados.
                 </div>
                 <div class="ct-chart height-50"></div>
               </div>
@@ -713,17 +552,18 @@
         </div>
         <div class="col-lg-3 col-sm-6">
           <!-- Widget Linearea Four -->
-          <div class="widget widget-shadow" id="widgetLineareaFour">
+          <div class="widget widget-shadow" id="widgetLineareaFour" style="height: 169px;">
             <div class="widget-content">
               <div class="padding-20 padding-top-10">
                 <div class="clearfix">
                   <div class="grey-800 pull-left padding-vertical-10">
-                    <i class="icon md-view-list grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>                    Items
+                  	<i class="icon md-flash grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>Projetos <span style="color: #d2d217;font-weight: bold;">Cadastrados</span>
                   </div>
-                  <span class="pull-right grey-700 font-size-30">845</span>
+                  <span class="pull-right grey-700 font-size-30"><%out.print(listaRms.size());%></span>
                 </div>
                 <div class="margin-bottom-20 grey-500">
-                  <i class="icon md-long-arrow-up green-500 font-size-16"></i>                  18.4% From this yesterday
+                  <i class="icon md-long-arrow-up green-500 font-size-16"></i> Possui uma boa média
+                </div>
                 </div>
                 <div class="ct-chart height-50"></div>
               </div>
@@ -737,7 +577,7 @@
           <!-- Panel Projects -->
           <div class="panel" id="projects">
             <div class="panel-heading">
-              <h3 class="panel-title">Linha do tempo Projetos</h3>
+              <h3 class="panel-title" style="font-weight: bold;">Linha do Tempo Projetos</h3>
             </div>
             <div class="table-responsive">
             	<canvas class="line-chart" style="padding-bottom:35px;"></canvas>
@@ -768,16 +608,12 @@
           </div>
           <!-- End Panel Projects -->
         </div>
-        <% 
-		DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
-		List<Rms> listaRms = new ArrayList<Rms>();
-		listaRms = daoGeneric.buscarRms(Rms.class, nome);%>
         <div class="col-xlg-7 col-md-6">
           <!-- Panel Projects Status -->
           <div class="panel" id="projects-status">
             <div class="panel-heading">
-              <h3 class="panel-title">
-                Projects Status
+              <h3 class="panel-title" style="font-weight: bold;">
+                Status dos Projetos
               </h3>
             </div>
             <div class="table-responsive">
@@ -796,14 +632,36 @@
                   <tr>
                     <td><%out.print(rms.getId_Demanda()); %></td>
                     <td><%out.print(rms.getProjeto()); %></td>
+                    <%if(rms.getDemanda().equals("desenvolvendo")){ %>
                     <td>
-                      <span class="label label-primary">Developing</span>
+                      <span class="label label-primary">Desenvolvendo</span>
                     </td>
+                    <%} %>
+                    <%if(rms.getDemanda().equals("estimando")){ %>
+                    <td>
+                      <span class="label label-warning">Estimando</span>
+                    </td>
+                    <%} %>
+                    <%if(rms.getDemanda().equals("homologando")){ %>
+                    <td>
+                      <span class="label label-info">Homologando</span>
+                    </td>
+                    <%} %>
+                    <%if(rms.getDemanda().equals("concluido")){ %>
+                    <td>
+                      <span class="label label-default" style="color: white; background-color: #20de20;">Concluído</span>
+                    </td>
+                    <%} %>
+                    <%if(rms.getDemanda().equals("cancelado")){ %>
+                    <td>
+                      <span class="label label-danger">Cancelado</span>
+                    </td>
+                    <%} %>
                     <td>
                      <div class="progress">
 					  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" 
-					  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
-					    40%
+					  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:<%out.print(rms.getProgresso());%>%">
+					    <%out.print(rms.getProgresso());%>%
 					  </div>
 					</div>
                     </td>

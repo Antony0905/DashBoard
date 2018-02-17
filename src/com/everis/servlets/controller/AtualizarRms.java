@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.everis.dao.DaoGeneric;
 import com.everis.model.Rms;
@@ -34,14 +33,13 @@ public class AtualizarRms extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		HttpSession session = request.getSession();
 		
-		String dono = (String) session.getAttribute("user");
 		String iddemanda = request.getParameter("iddemanda");
 		
 		rms = daoGeneric.buscarRmsObjectPorId(Rms.class, iddemanda);	
 		
 		String projeto = request.getParameter("projeto");
+		int progresso = Integer.parseInt(request.getParameter("progresso"));
 		String descdemanda = request.getParameter("descdemanda");
 		String tipodemanda = request.getParameter("tipodemanda");
 		String solvivo = request.getParameter("solvivo");
@@ -214,9 +212,9 @@ public class AtualizarRms extends HttpServlet {
 				rms.setFim_preprod(formatter.parse(fimpreprod));
 			}
 
-			rms.setDono(dono);
 			rms.setId_Demanda(iddemanda);
 			rms.setProjeto(projeto);
+			rms.setProgresso(progresso);
 			rms.setDescricao_demanda(descdemanda);
 			rms.setTipo_demanda(tipodemanda);
 			rms.setSolicitante_vivo(solvivo);
@@ -238,7 +236,7 @@ public class AtualizarRms extends HttpServlet {
 				out.println("<title> Servlet </title>");
 				out.println("</head>");
 				out.println("<body>");
-				out.println("<h1> Inserção Realizada com Sucesso!! '" + dono + "' '" + iddemanda + "' '" + "' '"
+				out.println("<h1> Inserção Realizada com Sucesso!! '" + iddemanda + "' '" + "' '"
 						+ situacao + "' '" + analfun + "' </h1>");
 				out.println("</body>");
 				out.println("</html>");

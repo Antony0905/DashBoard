@@ -3,11 +3,6 @@
 	import="javax.servlet.http.HttpSession"
 %>
 
-<%
-	if(session.getAttribute("user") == null){
-		response.sendRedirect("../pages/login.jsp");
-	}
-%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -35,6 +30,7 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="../../../global/fonts/material-design/material-design.min.css">
   <link rel="stylesheet" href="../../../global/fonts/brand-icons/brand-icons.min.css">
+  <link rel="stylesheet" href="../../../global/mycss/global.css">
   <!--[if lt IE 9]>
     <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -45,6 +41,8 @@
   <!-- Scripts -->
   <script src="../../../global/vendor/modernizr/modernizr.js"></script>
   <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
+  <script src="jquery-3.3.1.min.js"></script>
+ 
   <script>
   Breakpoints();
   </script>
@@ -71,8 +69,12 @@
         	document.getElementById("hidden2").style.display ="none";
         }
     }
-  </script>
-                  
+  	
+  	function sliderChange(val) {
+		document.getElementById('sliderStatus').innerHTML = val;
+	}
+  	
+</script>
                   
 </head>
 <body class="site-navbar-small site-menubar-fold site-menubar-keep">
@@ -117,14 +119,7 @@
             <a class="icon icon-fullscreen" data-toggle="fullscreen" href="#" role="button">
               <span class="sr-only">Toggle fullscreen</span>
             </a>
-          </li>
-          <li class="hidden-float">
-            <a class="icon md-search" data-toggle="collapse" href="#" data-target="#site-navbar-search"
-            role="button">
-              <span class="sr-only">Toggle Search</span>
-            </a>
-          </li>
-         
+          </li>      
             <ul class="dropdown-menu" role="menu">
               <li role="presentation">
                 <div class="mega-content">
@@ -284,301 +279,104 @@
                 </div>
               </li>
             </ul>
-          </li>
         </ul>
         <!-- End Navbar Toolbar -->
         <!-- Navbar Toolbar Right -->
-        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
-          <li class="dropdown">
-
-
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-gb"></span> English</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-fr"></span> French</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-cn"></span> Chinese</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-de"></span> German</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-nl"></span> Dutch</a>
-              </li>
-            </ul>
+        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right" style="padding-right: 20px;">
+        <li class="h1">
+             <% String nome = (String) session.getAttribute("user"); 
+									            if(nome != null){
+									            %> <p class="h1user">	<% out.print("Bem vindo " + nome); %> </p>
+									            <%}else{
+									            	%> <p class="h2user"> <% out.print("Usuário Não Logado");  %> </p>
+				          </li>
+          <a href="../pages/login.jsp"><img src="../../../global/img/login.png" style="padding-top: 15px;padding-right:5px;width: 140px;"/></a>  
+									            <% }%>
           </li>
-          <li class="dropdown">
-            <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <span class="avatar avatar-online">
-                <img src="../../../global/portraits/5.jpg" alt="...">
-                <i></i>
-              </span>
-            </a>
-             <ul class="dropdown-menu" role="menu">
-              <li role="presentation">
-                <a href="../pages/profile.jsp" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Billing</a>
-              </li>
-              <li role="presentation">
-                <a href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a>
-              </li>
-              <li class="divider" role="presentation"></li>
-              <li role="presentation">
-                <a href="../../../jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a data-toggle="dropdown" href="javascript:void(0)" title="Notifications" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <i class="icon md-notifications" aria-hidden="true"></i>
-              <span class="badge badge-danger up">5</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-              <li class="dropdown-menu-header" role="presentation">
-                <h5>NOTIFICATIONS</h5>
-                <span class="label label-round label-danger">New 5</span>
-              </li>
-              <li class="list-group" role="presentation">
-                <div data-role="container">
-                  <div data-role="content">
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-receipt bg-red-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">A new order has been placed</h6>
-                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">5 hours ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-account bg-green-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Completed the task</h6>
-                          <time class="media-meta" datetime="2015-06-11T18:29:20+08:00">2 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-settings bg-red-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Settings updated</h6>
-                          <time class="media-meta" datetime="2015-06-11T14:05:00+08:00">2 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Event started</h6>
-                          <time class="media-meta" datetime="2015-06-10T13:50:18+08:00">3 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <i class="icon md-comment bg-orange-600 white icon-circle" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Message received</h6>
-                          <time class="media-meta" datetime="2015-06-10T12:34:48+08:00">3 days ago</time>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li class="dropdown-menu-footer" role="presentation">
-                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                  <i class="icon md-settings" aria-hidden="true"></i>
-                </a>
-                <a href="javascript:void(0)" role="menuitem">
-                    All notifications
-                  </a>
-              </li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a data-toggle="dropdown" href="javascript:void(0)" title="Messages" aria-expanded="false"
-            data-animation="scale-up" role="button">
-              <i class="icon md-email" aria-hidden="true"></i>
-              <span class="badge badge-info up">3</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
-              <li class="dropdown-menu-header" role="presentation">
-                <h5>MESSAGES</h5>
-                <span class="label label-round label-info">New 3</span>
-              </li>
-              <li class="list-group" role="presentation">
-                <div data-role="container">
-                  <div data-role="content">
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-online">
-                            <img src="../../../global/portraits/2.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Mary Adams</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-17T20:22:05+08:00">30 minutes ago</time>
-                          </div>
-                          <div class="media-detail">Anyways, i would like just do it</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-off">
-                            <img src="../../../global/portraits/3.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Caleb Richards</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-17T12:30:30+08:00">12 hours ago</time>
-                          </div>
-                          <div class="media-detail">I checheck the document. But there seems</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-busy">
-                            <img src="../../../global/portraits/4.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">June Lane</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-16T18:38:40+08:00">2 days ago</time>
-                          </div>
-                          <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
-                        </div>
-                      </div>
-                    </a>
-                    <a class="list-group-item" href="javascript:void(0)" role="menuitem">
-                      <div class="media">
-                        <div class="media-left padding-right-10">
-                          <span class="avatar avatar-sm avatar-away">
-                            <img src="../../../global/portraits/5.jpg" alt="..." />
-                            <i></i>
-                          </span>
-                        </div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Edward Fletcher</h6>
-                          <div class="media-meta">
-                            <time datetime="2015-06-15T20:34:48+08:00">3 days ago</time>
-                          </div>
-                          <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li class="dropdown-menu-footer" role="presentation">
-                <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
-                  <i class="icon md-settings" aria-hidden="true"></i>
-                </a>
-                <a href="javascript:void(0)" role="menuitem">
-                    See all messages
-                  </a>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
-        <!-- End Navbar Toolbar Right -->
-      </div>
-      <!-- End Navbar Collapse -->
-      <!-- Site Navbar Seach -->
-      <div class="collapse navbar-search-overlap" id="site-navbar-search">
-        <form role="search">
-          <div class="form-group">
-            <div class="input-search">
-              <i class="input-search-icon md-search" aria-hidden="true"></i>
-              <input type="text" class="form-control" name="site-search" placeholder="Search...">
-              <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search"
-              data-toggle="collapse" aria-label="Close"></button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <!-- End Site Navbar Seach -->
-    </div>
-  </nav>
-  <div class="site-menubar">
-    <ul class="site-menu">
-      <li class="site-menu-item">
-        <a class="animsition-link" href="../../../">
-          <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
-          <span class="site-menu-title">Dashboard</span>
-        </a>
-      </li>
-      <li class="site-menu-item has-sub active">
-        <a href="javascript:void(0)">
-          <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
-          <span class="site-menu-title">Cadastrar Demanda</span>
-          <span class="site-menu-arrow"></span>
-        </a>
-        <ul class="site-menu-sub">
-          <li class="site-menu-item active">
-            <a class="animsition-link" href="menu-collapsed.jsp">
-              <span class="site-menu-title">Nova Demanda</span>
-            </a>
-          </li>
-          <li class="site-menu-item">
-            <a class="animsition-link" href="../layouts/grids.jsp">
-              <span class="site-menu-title">Editar Demanda</span>
-            </a>
-          </li>
-
-          <li class="site-menu-item">
-            <a class="animsition-link" href="../layouts/layout-grid.jsp">
-              <span class="site-menu-title">Excluir Demanda</span>
-            </a>
-          </li>
-          <li class="site-menu-item">
-          </li>
-        </ul>
-      </li>
-
-
+          <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+	          <li class="dropdown" style="margin-right: 25px;">
+	            <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+	            data-animation="scale-up" role="button">
+	              <span class="avatar avatar-online">
+	                <img src="../../../global/portraits/5.jpg" alt="...">
+	                <i></i>
+	              </span>
+	            </a>
+	             <ul class="dropdown-menu" role="menu">
+	              <li role="presentation">
+	                <a href="../pages/profile.jsp" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
+	              </li>
+	              <li role="presentation">
+	                <a href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Billing</a>
+	              </li>
+	              <li role="presentation">
+	                <a href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a>
+	              </li>
+	              <li class="divider" role="presentation"></li>
+	              <li role="presentation">
+	                <a href="../../../jsp/sair.jsp" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
+	              </li>
+	            </ul>
+	          </li>  
+	        </ul>
+	        <!-- End Navbar Toolbar Right -->
+	      </div>
+	      <!-- End Navbar Collapse -->
+	      <!-- Site Navbar Seach -->
+	      <div class="collapse navbar-search-overlap" id="site-navbar-search">
+	        <form role="search">
+	          <div class="form-group">
+	            <div class="input-search">
+	              <i class="input-search-icon md-search" aria-hidden="true"></i>
+	              <input type="text" class="form-control" name="site-search" placeholder="Search...">
+	              <button type="button" class="input-search-close icon md-close" data-target="#site-navbar-search"
+	              data-toggle="collapse" aria-label="Close"></button>
+	            </div>
+	          </div>
+	        </form>
+	      </div>
+	      <!-- End Site Navbar Seach -->
+	    </div>
+	  </nav>
+	  <div class="site-menubar">
+	    <ul class="site-menu">
+	      <li class="site-menu-item">
+	        <a class="animsition-link" href="../../../">
+	          <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+	          <span class="site-menu-title">Dashboard</span>
+	        </a>
+	      </li>
+	      <li class="site-menu-item has-sub active">
+	        <a href="javascript:void(0)">
+	          <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
+	          <span class="site-menu-title">Opções de Projeto</span>
+	          <span class="site-menu-arrow"></span>
+	        </a>
+	        <ul class="site-menu-sub">
+	          <li class="site-menu-item active">
+	            <a class="animsition-link" href="menu-collapsed.jsp">
+	              <span class="site-menu-title">Novo Projeto</span>
+	            </a>
+	          </li>
+	          <li class="site-menu-item">
+	            <a class="animsition-link" href="../layouts/grids.jsp">
+	              <span class="site-menu-title">Editar Projeto</span>
+	            </a>
+	          </li>
+	
+	          <li class="site-menu-item">
+	            <a class="animsition-link" href="../layouts/view.jsp">
+	              <span class="site-menu-title">Visualizar Projeto</span>
+	            </a>
+	          </li>
+	          <li class="site-menu-item">
+	          </li>
+	        </ul>
+	      </li>
       <li class="site-menu-item has-sub">
         <a href="javascript:void(0)">
-          <i class="site-menu-icon md-google-pages" aria-hidden="true"></i>
-          <span class="site-menu-title">Cadastrar Usuário</span>
+          <i class="icon md-account grey-600 font-size-20 vertical-align-bottom" aria-hidden="true" style="margin-bottom: 13px;margin-right: 17px;"></i>
+          <span class="site-menu-title">Opções de Usuário</span>
           <span class="site-menu-arrow"></span>
         </a>
         <ul class="site-menu-sub">
@@ -692,7 +490,7 @@
   <!-- Page -->
   <div class="page animsition">
     <div class="page-header">
-      <h1 class="page-title">Nova Demanda </h1>
+      <h1 class="page-title">Novo Projeto </h1>
     </div>	
 
     <div class="page-content">
@@ -706,8 +504,13 @@
                   </div>
                   <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" required> </label>
                   <label> Projeto <input type="text" name="projeto" id="projeto" required> </label>
-                  <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" required > </label>
-                  <label> Tipo da Demanda<select name="tipodemanda"> 
+                  <label> Descrição <input type="text" name="descdemanda" id="descdemanda" required > </label>
+                  <label style="padding-left: 100px;">
+                  	Progresso:&nbsp<span id="sliderStatus"> 0</span> % 
+                  	<input type="range" id="range" name="progresso" min="0" max="100" value="0" step="10" onchange="sliderChange(this.value)">
+                  </label>
+                  <br><br>
+                  <label> Tipo<select name="tipodemanda"> 
                   		<option name="pp" value="pp">PP</option>
                   		<option name="projeto" value="Projeto">Projeto</option>
                   </select>  </label>
@@ -769,10 +572,12 @@
                   <label> Fim Homologação VIVO <input type="date" name="fimhomovivo" id="fimhomovivo"></label> <br><br>
                   <label> Início Pré-Prod <input type="date" name="inpreprod" id="inpreprod"></label>
                   <label> Fim Pré-Prod <input type="date" name="fimpreprod" id="fimpreprod"></label>
-				  <label> Demanda <select name="demanda" id="demanda">
-				  	<option name="andamento" value="andamento"> Em Andamento </option>
-				  	<option name="concluido" value="concluido"> Concluída </option>
-				  	<option name="cancelada" value="cancelada"> Cancelada </option>
+				  <label> Status <select name="demanda" id="demanda">
+				  	<option name="estimando" value="estimando"> Estimando </option>
+				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
+				  	<option name="homologando" value="homologando"> Homologando </option>
+				  	<option name="concluido" value="concluido"> Concluído </option>
+				  	<option name="cancelado" value="cancelado"> Cancelado </option>
 				  </select></label>  <br><br> 
 				  
 				  </div>
