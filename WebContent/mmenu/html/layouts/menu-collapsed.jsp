@@ -38,6 +38,14 @@
     <script src="../../../global/vendor/media-match/media.match.min.js"></script>
     <script src="../../../global/vendor/respond/respond.min.js"></script>
     <![endif]-->
+    
+<style type="text/css">
+
+.asterisco{
+	color: red;
+	font-weight: bold;
+}
+</style>
   <!-- Scripts -->
   <script src="../../../global/vendor/modernizr/modernizr.js"></script>
   <script src="../../../global/vendor/breakpoints/breakpoints.js"></script>
@@ -74,10 +82,24 @@
 		document.getElementById('sliderStatus').innerHTML = val;
 	}
   	
+  	function abrirModalRmsJaCadastrado(){
+		document.getElementById('abrirModal').click();
+	}
 </script>
-                  
 </head>
+<%	Boolean rmsJaCadastrada = (Boolean) session.getAttribute("rmsJaCadastrada");
+	if(rmsJaCadastrada == null){
+		rmsJaCadastrada = false;
+	}
+%>
+<%if(rmsJaCadastrada){ %>
+<body class="site-navbar-small dashboard" onload="abrirModalRmsJaCadastrado()">
+<%}else{ %>  
 <body class="site-navbar-small site-menubar-fold site-menubar-keep">
+<%} session.removeAttribute("rmsJaCadastrada");%>
+
+
+
   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -490,71 +512,79 @@
   <!-- Page -->
   <div class="page animsition">
     <div class="page-header">
-      <h1 class="page-title">Novo Projeto </h1>
+      <h1 class="page-title" style="font-weight: bold; color: #fb8c00;">Novo Projeto </h1>
     </div>	
 
     <div class="page-content">
       <div class="panel">
         <div class="panel-heading">
-          <h3 class="panel-title">Preencha o Formulário Abaixo</h3>
-          <form action="../../../InserirRms" method="post"> 
+          <h3 class="panel-title" style="font-weight: bold; color: #fb8c00;">Preencha o Formulário Abaixo</h3>
+          <form action="../../../InserirRms" method="post" style="color: black;"> 
               <fieldset id="fildset">
                   <div class="divgrupo">
                       <p class="grupo"> FASE DE ESTIMATIVA </p>
                   </div>
-                  <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" required> </label>
-                  <label> Projeto <input type="text" name="projeto" id="projeto" required> </label>
-                  <label> Descrição <input type="text" name="descdemanda" id="descdemanda" required > </label>
-                  <label style="padding-left: 100px;">
+                  <label><span class="asterisco">*</span> ID Demanda &nbsp&nbsp <input type="text" class="form-control" name="iddemanda" id="iddemanda" required> </label>
+                  <label><span class="asterisco">*</span> Projeto <input type="text" class="form-control" name="projeto" id="projeto" required> </label>
+                  <label> Data de Release <input type="date" class="form-control" name="datarelease" id="datarelease"></label>
+                  <label> Status <select name="demanda" class="form-control" id="demanda">
+				  	<option name="estimando" value="estimando"> Estimando </option>
+				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
+				  	<option name="homologando" value="homologando"> Homologando </option>
+				  	<option name="concluido" value="concluido"> Concluído </option>
+				  	<option name="cancelado" value="cancelado"> Cancelado </option>
+				  </select></label>
+                  <label style="padding-left: 50px;">
                   	Progresso:&nbsp<span id="sliderStatus"> 0</span> % 
                   	<input type="range" id="range" name="progresso" min="0" max="100" value="0" step="10" onchange="sliderChange(this.value)">
                   </label>
                   <br><br>
-                  <label> Tipo<select name="tipodemanda"> 
+				  <div class="form-group">
+				    <label for="comment"><span class="asterisco">*</span> Descrição</label>
+				    <textarea class="form-control" rows="5" name="descdemanda" id="descdemanda" required></textarea>
+	              </div>
+                  <br>
+                  <label> Solicitante Vivo <input type="text" class="form-control" name="solvivo" id="solvivo"> </label> 			
+                  <label> Analista Responsável <input type="text" class="form-control" name="analresp" id="analresp"> </label>
+                  <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada" class="form-control"> </label> 
+                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega" class="form-control"></label> 
+                  <label> Tipo&nbsp<select name="tipodemanda" class="form-control"> 
                   		<option name="pp" value="pp">PP</option>
                   		<option name="projeto" value="Projeto">Projeto</option>
-                  </select>  </label>
-                  <br><br>
-                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo"> </label> 			
-                  <label> Analista Responsável <input type="text" name="analresp" id="analresp"> </label> <br><br>
-                  <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada"> </label> 
-                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega"></label> 
-                  <label> Data Estimada Real  <input type="date" name="real" id="real"></label> <br><br>
-                  <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente"></label> 
-                  
-                  
+                  </select>  </label><br><br>
+                  <label> Data Estimada Real  <input type="date" name="real" id="real" class="form-control"></label>
+                  <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente" class="form-control"></label> 
                   <!--  Cada Jornada Equivale a 8 horas e cada ponto a 4 horas  --> 
-                  <label> Jornadas  <input type="number" name="jornadas" id="jornadas"></label> 
-                  <label> Pontos <input type="number" name="pontos" id="pontos"></label> <br><br>
+                  <label> Jornadas  <input type="number" name="jornadas" id="jornadas" class="form-control"></label> 
+                  <label> Pontos <input type="number" name="pontos" id="pontos" class="form-control"></label>
                   
                   <!-- Se a situaÃ§Ã£o da demanda estiver em "APROVADA" deve aparecer o próximo formulário
                   Caso for reprovada deve finalizar a demanda, demais opções permanecer em aberto-->
-                  <label>Situação da Estimativa <select name="situacao" id="situacao" onchange="optionCheck()"> 
+                  <label>Situação da Estimativa <select name="situacao" id="situacao" onchange="optionCheck()" class="form-control"> 
                     <option name="aberta" value="aberta"> Aberta </option>
                     <option name="andamento" value="andamento"> Em Andamento </option>
                     <option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
                     <option name="aprovada"  value="aprovada"> Aprovada </option>
                     <option name="reprovada" value="reprovada"> Reprovada </option>
-                  </select> </label> <br><br>	
+                  </select> </label> <br><br><br><br>	
                   
                   <div id="hidden" style = "visibility:hidden; display:none;">
                   <div class="divgrupo">
                       <p class="grupo"> FASE DE DESENVOLVIMENTO </p>
                   </div>
 
-                  <label> Linha CAP <input type="text" name="linhacap" id="linhacap"></label>
-                  <label> Início RMS v1 <input type="date" name="inrms" id="inrmsv1"></label>
-                  <label> Fim RMS v1 <input type="date" name="fimrms" id="fimrmsv1"></label> <br><br>
-                  <label> Aprovação RMS v1 <input type="date" name="aprms" id="aprmsv1"></label>
-                  <label> Início Dev <input type="date" name="indev" id="indev"></label>
-                  <label> Fim Dev <input type="date" name="fimdev" id="fimdev"></label> <br><br>
-                  <label> Início Homologação Everis <input type="date" name="inhomoeveris" id="inhomoeveris"></label>
-                  <label> Fim Homologação Everis <input type="date" name="fimhomoeveris" id="fimhomoeveris""></label> <br><br>
-                  <label> Data de Release <input type="date" name="datarelease" id="datarelease""></label>
-                  <label> Início Planejamento  <input type="date" name="inplanejamento" id="planejamento""></label>
-                  <label> Fim Planejamento  <input type="date" name="fimplanejamento" id="planejamento""></label>
+                  <label> Linha CAP <input type="text" name="linhacap" id="linhacap" class="form-control"></label>
+                  <label> Início RMS v1 <input type="date" name="inrms" id="inrmsv1" class="form-control"></label>
+                  <label> Fim RMS v1 <input type="date" name="fimrms" id="fimrmsv1" class="form-control"></label>
+                  <label> Aprovação RMS v1 <input type="date" name="aprms" id="aprmsv1" class="form-control"></label><br><br>
+                  <label> Início Dev <input type="date" name="indev" id="indev" class="form-control"></label>
+                  <label> Fim Dev <input type="date" name="fimdev" id="fimdev" class="form-control"></label> 
+                  <label> Início Homologação Everis <input type="date" name="inhomoeveris" id="inhomoeveris" class="form-control"></label>
+                  <label> Fim Homologação Everis <input type="date" name="fimhomoeveris" id="fimhomoeveris" class="form-control"></label> <br><br>
+                  <label> Início Planejamento  <input type="date" name="inplanejamento" id="planejamento" class="form-control"></label>
+                  <label> Fim Planejamento  <input type="date" name="fimplanejamento" id="planejamento" class="form-control"></label>
                   
-                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
+                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()" class="form-control"> 
                     <option name="andamento" value="andamento"> Em Andamento </option>
                     <option name="cancelado" value="cancelado"> Cancelado </option>
                     <option name="finalizado" value="finalizado"> Finalizado </option>
@@ -567,25 +597,43 @@
                       <p class="grupo"> FASE DE HOMOLOGAÇÃO </p>
                   </div>
                   
-                  <label> Esteira <input type="text" name="esteira" id="esteira"></label>
-                  <label> Início Homologação VIVO <input type="date" name="inhomovivo" id="inhomovivo"></label>
-                  <label> Fim Homologação VIVO <input type="date" name="fimhomovivo" id="fimhomovivo"></label> <br><br>
-                  <label> Início Pré-Prod <input type="date" name="inpreprod" id="inpreprod"></label>
-                  <label> Fim Pré-Prod <input type="date" name="fimpreprod" id="fimpreprod"></label>
-				  <label> Status <select name="demanda" id="demanda">
-				  	<option name="estimando" value="estimando"> Estimando </option>
-				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
-				  	<option name="homologando" value="homologando"> Homologando </option>
-				  	<option name="concluido" value="concluido"> Concluído </option>
-				  	<option name="cancelado" value="cancelado"> Cancelado </option>
-				  </select></label>  <br><br> 
-				  
+                  <label> Esteira <input type="text" name="esteira" id="esteira" class="form-control"></label>
+                  <label> Início Homologação VIVO <input type="date" name="inhomovivo" id="inhomovivo" class="form-control"></label>
+                  <label> Fim Homologação VIVO <input type="date" name="fimhomovivo" id="fimhomovivo" class="form-control"></label>
+                  <label> Início Pré-Prod <input type="date" name="inpreprod" id="inpreprod" class="form-control"></label>
+                  <label> Fim Pré-Prod <input type="date" name="fimpreprod" id="fimpreprod" class="form-control"></label><br><br><br>
 				  </div>
-                  <input type="submit" value="Cadastrar" id="submit"> 
-                  <input type="reset" value="Limpar">
-
-              </fieldset>
+				  <span style="float: right;">
+	                  <button type="reset" class="btn btn-primary">Limpar</button>
+	                  <button type="submit" class="btn btn-primary" id="submit">Cadastrar</button>
+				  </span>
+			</fieldset>
           </form>
+          
+          <!-- Modal -->
+            <button type="button" id="abrirModal" data-toggle="modal" data-target="#modalRmsJaCadastrado" hidden="true"/>
+		  	</button> 
+				  
+			<div class="modal fade" id="modalRmsJaCadastrado" tabindex="-1" role="dialog" aria-labelledby="modalRmsCadastradaComSucesso" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="modalRmsJaCadastrado">Atenção</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			         ID de Projeto já cadastrado!
+			      </div>
+			      <div class="modal-footer">
+			      <form>
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- End Modal -->
         </div>
         <div class="panel-body">
 

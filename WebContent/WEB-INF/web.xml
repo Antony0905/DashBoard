@@ -91,8 +91,8 @@
 		<url-pattern>/AtualizarRms</url-pattern>
 	</servlet-mapping>
 
-	<!-- <error-page> <error-code>500</error-code> <location>error.jsp</location> 
-		</error-page> <error-page> <error-code>404</error-code> <location>paginanaoencontrada.jsp</location> 
+<!-- 		<error-page> <error-code>500</error-code> <location>../error/error.jsp</location> 
+	</error-page> <error-page> <error-code>404</error-code> <location>paginanaoencontrada.jsp</location> 
 		</error-page> <error-page> <exception-type>java.lang.Throwable</exception-type> 
 		<location>error.jsp</location> </error-page> <error-page> <exception-type>javax.faces.application.ViewExpiredException</exception-type> 
 		<location>sessaoexpirada.jsp</location> </error-page> -->

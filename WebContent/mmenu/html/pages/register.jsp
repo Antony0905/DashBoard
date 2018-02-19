@@ -54,6 +54,11 @@
 <script>
 	Breakpoints();
 </script>
+<script type="text/javascript">
+	function abrirModalUsuarioJaCadastrado(){
+	document.getElementById('abrirModal').click();
+}
+</script>
 <style>
 .legenda{
 	font-size: 30px;
@@ -68,7 +73,18 @@
 }
 </style>
 </head>
-<body class="site-navbar-small site-menubar-fold site-menubar-keep">
+
+<%	Boolean usuarioJaCadastrado = (Boolean) session.getAttribute("usuarioJaCadastrado");
+	if(usuarioJaCadastrado == null){
+		usuarioJaCadastrado = false;
+	}
+%>
+<%if(usuarioJaCadastrado == true){ %>
+<body class="site-navbar-small dashboard" onload="abrirModalUsuarioJaCadastrado()">
+<%}else{ %>  
+<body class="site-navbar-small site-menubar-fold site-menubar-keep">	
+<%} session.removeAttribute("usuarioJaCadastrado");%>
+
 	<!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -537,7 +553,31 @@
 
 						</fieldset>
 					</form>
-
+          <!-- Modal -->
+            <button type="button" id="abrirModal" data-toggle="modal" data-target="#modalUsuarioJaCadastrado" hidden="true"/>
+		  	</button> 
+			<% String nomeUsuarioJaCadastrado = (String) session.getAttribute("nomeJaCadastrado"); %>	  
+			<div class="modal fade" id="modalUsuarioJaCadastrado" tabindex="-1" role="dialog" aria-labelledby="modalUsuarioJaCadastrado" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="modalUsuarioJaCadastrado">Atenção</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			         Usuário <span style="font-weight: bold;"><%out.print(nomeUsuarioJaCadastrado);%></span> Já Cadastrado.
+			      </div>
+			      <% session.removeAttribute("nomeJaCadastrado"); %>
+			      <div class="modal-footer">
+			      <form>
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- End Modal -->
 					<div class="panel-body"></div>
 				</div>
 			</div>

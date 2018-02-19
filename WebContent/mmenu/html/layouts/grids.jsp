@@ -492,149 +492,66 @@
 
 
 <div class="page animsition">
-    <div class="page-header">
-      <h1 class="page-title" style="color:blue;font-weight: bold;">Editar Demanda</h1>
-    </div>	
-
      <div class="page-content">
-      <div class="panel">
+      <div class="panel" style="border-bottom: 4px solid #7082e6;">
         <div class="panel-heading">
 	        <div style="display: inline-flex;width: 100%;">
-	        <% List<Rms> listaRms = (List<Rms>) session.getAttribute("listaRms"); 
+	        <% List<Rms> listaRms = (List<Rms>) session.getAttribute("listaRms");
 	        if(!(listaRms == null || listaRms.isEmpty())){%>
-	          <h3 class="panel-title" style="width: 400px">Preencha o Formulário Abaixo</h3>
+	          <h3 class="panel-title" style="width: 500px; font-weight: bold; color: #fb8c00;" >Preencha o Formulário Abaixo</h3>
 	        <%} else{%>
-	        	<h3 class="panel-title" style="width: 400px">Pesquise por um projeto</h3>
+	        	<h3 class="panel-title" style="width: 400px;font-weight: bold;color:#4153b7;font-size: 25px;">Editar Projeto</h3>
 	        <%} %>
-	          <form class="panel-title" action="../../../BuscarRms" method="POST" style="width:100%; float: right;">
+	         <form class="panel-title" action="../../../BuscarRms" method="POST" style="width:100%; float: right;">
 	           	<div  style="float: right;">
-		          	<label> Buscar Projeto Por ID <input type="text" name="pesquisa" id="pesquisa" required="required"> </label>
-		          	<input type="submit" value="Pesquisar" name="pesquisar" id="pesquisar">
+		          	<label><input type="text" class="form-control" id="pesquisa" name="pesquisa" placeholder="Buscar Demanda Por ID" required></label>
+		          	<button type="submit" value="Pesquisar" name="pesquisar" id="pesquisar" class="btn btn-primary mb-2">Buscar</button>
 	          	</div>
 	          </form>
 	        </div> 
 	        
 	        <%if(listaRms == null || listaRms.isEmpty()){%>
           <form action="../../../InserirRms" method="post"> 
+              
+              <%
+			  Boolean idPesquisadoNaoEncontrado = (Boolean) session.getAttribute("idPesquisadoNaoEncontrado");
+	          if(idPesquisadoNaoEncontrado == null){
+	        	  idPesquisadoNaoEncontrado = false;
+	          }
+              if(idPesquisadoNaoEncontrado == false){ %>
               <fieldset id="fildset">
                   <div>
-                      <h1 style="font-weight: bold; color:blue;"> 
-                      	Nehum projeto foi selecionado! Busque por algum para edita-lo. 
+                      <img src="../../../global/img/projeto.png" style="float:left;"/>
+                  	  <h1 style="font-weight: bold; black;margin-top: 7%;float: right;width: 850px;"> 
+                      	Pesquise uma demanda para ser editada.
                       </h1>
-                      
-                      <img src="../../../global/img/projeto.png" style="float:right;"/>
                   </div>
-                            <% }else{ 
+               </fieldset>
+               <%}%>
+                <% if(idPesquisadoNaoEncontrado == true){ %>
+                <fieldset id="fildset" style="height: 150px;">
+                  <div>
+                      <img src="../../../global/img/xdemanda.jpg" style="float:left; width: 50px;margin-left: 10%;margin-top: 5%;"/>
+                  	  <h1 style="font-weight: bold; black;margin-top: 6%;margin-right:6%; float: right;width: 850px; color: #e67272;"> 
+                      	ID não encontrado! Favor pesquisar novamente.
+                      </h1>
+                  </div>
+                 </fieldset>
+               <%}
+              session.removeAttribute("idPesquisadoNaoEncontrado");%>               
+          <% }else{ 
           Rms rms = listaRms.get(0);%>
           <form action="../../../AtualizarRms" method="post"> 
               <fieldset id="fildset">
                   <div class="divgrupo">
                       <p class="grupo"> FASE DE ESTIMATIVA </p>
                   </div>
-                  <label> ID Demanda &nbsp&nbsp <input type="text" name="iddemanda" id="iddemanda" value="<%out.println(rms.getId_Demanda()); %>" readonly> </label>
-                  <label> Projeto <input type="text" name="projeto" id="projeto" value="<%out.println(rms.getProjeto()); %>" readonly> </label>
-                  <label> Descrição da Demanda <input type="text" name="descdemanda" id="descdemanda" value="<%out.println(rms.getDescricao_demanda()); %>" required > </label>
-                  <%if(rms.getTipo_demanda().equals("pp")){ %>
-                  <label style="padding-left: 100px;">
-                  	Progresso:&nbsp<span id="sliderStatus"> <%out.print(rms.getProgresso());%></span> % 
-                  	<input type="range" id="range" name="progresso" min="0" max="100" value="<%out.print(rms.getProgresso());%>" step="10" onchange="sliderChange(this.value)">
-                  </label>
-                  <label> Tipo da Demanda<select name="tipodemanda"> 
-                  		<option name="pp" value="pp" selected="selected">PP</option>
-                  		<option name="projeto" value="Projeto">Projeto</option>
-                  </select>  </label>
-                  <br><br>
-                  <% }else{%>
-                  <label> Tipo da Demanda<select name="tipodemanda"> 
-                  		<option name="pp" value="pp">PP</option>
-                  		<option name="projeto" value="Projeto" selected="selected">Projeto</option>
-                  </select>  </label>
-                  <%} %>
-                  <label> Solicitante vivo <input type="text" name="solvivo" id="solvivo" value="<%out.println(rms.getSolicitante_vivo()); %>"> </label>				
-                  <label> Analista Responsável <input type="text" name="analresp" id="analresp" value="<%out.println(rms.getAnal_resp()); %>"> </label><br><br>
-                  <label> Data Entrada Estimada <input type="date" name="entrada" id="entrada" value="<%out.print(rms.getDt_entrada_estimada());%>" /> </label> 
-                  <label> Data Entrega Estimada  <input type="date" name="entrega" id="entrega" value="<%out.print(rms.getDt_entrega_estm());%>"/></label> 
-                  <label> Data Estimada Real  <input type="date" name="real" id="real" value="<%out.print(rms.getDt_real_estm());%>"/></label> <br><br>
-                  <label> Estimativa Cliente  <input type="date" name="estimacliente" id="estimacliente" value="<%out.print(rms.getEstimativa_cliente());%>"></label> 
-                  
-                  
-                  <!--  Cada Jornada Equivale a 8 horas e cada ponto a 4 horas  --> 
-                  <label> Jornadas  <input type="number" name="jornadas" id="jornadas" value="<%out.print(rms.getJornadas());%>"/></label> 
-                  <label> Pontos <input type="number" name="pontos" id="pontos" value="<%out.print(rms.getPontos());%>"/></label> <br><br>
-                  
-                  <!-- Se a situaÃ§Ã£o da demanda estiver em "APROVADA" deve aparecer o próximo formulário
-                  Caso for reprovada deve finalizar a demanda, demais opções permanecer em aberto-->
-                  <label>Situação da Estimativa <select name="situacao" id="situacao" onchange="optionCheck()"> 
-                    <option name="aberta" value="aberta"> Aberta </option>
-                    <option name="andamento" value="andamento"> Em Andamento </option>
-                    <option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
-                    <option name="aprovada"  value="aprovada"> Aprovada </option>
-                    <option name="reprovada" value="reprovada"> Reprovada </option>
-                  </select> </label> <br><br>	
-                  
-                  <div>
-                  <div class="divgrupo">
-                      <p class="grupo"> FASE DE DESENVOLVIMENTO </p>
-                  </div>
-
-                  <label> Linha CAP <input type="text" name="linhacap" id="linhacap" value="<%out.print(rms.getLinha_cap());%>"></label>
-                  <label> Início RMS v1 <input type="date" name="inrms" id="inrmsv1" value="<%out.print(rms.getInicio_rms());%>"></label>
-                  <label> Fim RMS v1 <input type="date" name="fimrms" id="fimrmsv1" value="<%out.print(rms.getFim_rms());%>"></label> <br><br>
-                  <label> Aprovação RMS v1 <input type="date" name="aprms" id="aprmsv1" value="<%out.print(rms.getAprovacao_rms());%>"></label>
-                  <label> Início Dev <input type="date" name="indev" id="indev"  value="<%out.print(rms.getInicio_dev());%>"></label>
-                  <label> Fim Dev <input type="date" name="fimdev" id="fimdev" value="<%out.print(rms.getFim_dev());%>"></label> <br><br>
-                  <label> Início Homologação Everis <input type="date" name="inhomoeveris" id="inhomoeveris" value="<%out.print(rms.getInicio_homo_everis());%>"></label>
-                  <label> Fim Homologação Everis <input type="date" name="fimhomoeveris" id="fimhomoeveris" value="<%out.print(rms.getFim_homo_everis());%>"></label> <br><br>
-                  <label> Data de Release <input type="date" name="datarelease" id="datarelease""></label>
-                  <label> Início Planejamento  <input type="date" name="inplanejamento" id="planejamento" value="<%out.print(rms.getInplanejamento());%>"></label>
-                  <label> Fim Planejamento  <input type="date" name="fimplanejamento" id="planejamento" value="<%out.print(rms.getFimplanejamento());%>"></label>
-                  
-                  <%if(rms.getAnalise_funcional().equals("andamento")){%>
-                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
-                    <option name="andamento" value="andamento" selected="selected"> Em Andamento </option>
-                    <option name="cancelado" value="cancelado"> Cancelado </option>
-                    <option name="finalizado" value="finalizado"> Finalizado </option>
-                    <option name="pendente" value="pendente"> Pendente Informação </option>
-                  </select> </label> <br><br>
-                  <%} %>
-                  <%if(rms.getAnalise_funcional().equals("cancelado")){%>
-                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
-                    <option name="andamento" value="andamento"> Em Andamento </option>
-                    <option name="cancelado" value="cancelado" selected="selected"> Cancelado </option>
-                    <option name="finalizado" value="finalizado"> Finalizado </option>
-                    <option name="pendente" value="pendente"> Pendente Informação </option>
-                  </select> </label> <br><br>
-                  <%} %>
-                  <%if(rms.getAnalise_funcional().equals("finalizado")){%>
-                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
-                    <option name="andamento" value="andamento"> Em Andamento </option>
-                    <option name="cancelado" value="cancelado"> Cancelado </option>
-                    <option name="finalizado" value="finalizado" selected="selected"> Finalizado </option>
-                    <option name="pendente" value="pendente"> Pendente Informação </option>
-                  </select> </label> <br><br>
-                  <%} %>
-                  <%if(rms.getAnalise_funcional().equals("pendente")){%>
-                  <label> Análise Funcional <select name="analfun" id="analfun" onchange="optionCheck2()"> 
-                    <option name="andamento" value="andamento"> Em Andamento </option>
-                    <option name="cancelado" value="cancelado"> Cancelado </option>
-                    <option name="finalizado" value="finalizado"> Finalizado </option>
-                    <option name="pendente" value="pendente" selected="selected"> Pendente Informação </option>
-                  </select> </label> <br><br>
-                  <%} %>
-                  </div>				
-                    
-                  <div>
-                  <div class="divgrupo">
-                      <p class="grupo"> FASE DE HOMOLOGAÇÃO </p>
-                  </div>
-                  
-                  <label> Esteira <input type="text" name="esteira" id="esteira" value="<%out.print(rms.getEsteira());%>"></label>
-                  <label> Início Homologação VIVO <input type="date" name="inhomovivo" id="inhomovivo" value="<%out.print(rms.getInicio_homo_vivo());%>"></label>
-                  <label> Fim Homologação VIVO <input type="date" name="fimhomovivo" id="fimhomovivo" value="<%out.print(rms.getFim_homo_vivo());%>"></label> <br><br>
-                  <label> Início Pré-Prod <input type="date" name="inpreprod" id="inpreprod" value="<%out.print(rms.getInicio_preprod());%>"></label>
-                  <label> Fim Pré-Prod <input type="date" name="fimpreprod" id="fimpreprod" value="<%out.print(rms.getFim_preprod());%>"></label>
-				  <%if(rms.getDemanda().equals("estimando")){ %>
-				  <label> Demanda <select name="demanda" id="demanda">
+                  <label>Usuário Dono: <span style="font-weight: bold;"><%out.print(rms.getDono());%></span><br><br>
+                  <label> ID Demanda &nbsp&nbsp <input type="text" class="form-control" name="iddemanda" id="iddemanda" value="<%out.println(rms.getId_Demanda()); %>" readonly> </label>
+                  <label> Projeto <input type="text" class="form-control" name="projeto" id="projeto" value="<%out.println(rms.getProjeto()); %>" readonly> </label>
+                  <label> Data de Release <input type="date" class="form-control" name="datarelease" id="datarelease""></label>
+                    <%if(rms.getDemanda().equals("estimando")){ %>
+				  <label> Status <select class="form-control" name="demanda" id="demanda">
 				  	<option name="estimando" value="estimando" selected="selected"> Estimando </option>
 				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
 				  	<option name="homologando" value="homologando"> Homologando </option>
@@ -643,7 +560,7 @@
 				  </select></label>  <br><br> 
 				  <%}%>
 				  <%if(rms.getDemanda().equals("desenvolvendo")){ %>
-				  <label> Demanda <select name="demanda" id="demanda">
+				  <label> Status <select class="form-control" name="demanda" id="demanda">
 				  	<option name="estimando" value="estimando"> Estimando </option>
 				  	<option name="desenvolvendo" value="desenvolvendo" selected="selected"> Desenvolvendo </option>
 				  	<option name="homologando" value="homologando"> Homologando </option>
@@ -652,7 +569,7 @@
 				  </select></label>  <br><br> 
 				  <%}%>
 				  <%if(rms.getDemanda().equals("homologando")){ %>
-				  <label> Demanda <select name="demanda" id="demanda">
+				  <label> Status <select class="form-control" name="demanda" id="demanda">
 				  	<option name="estimando" value="estimando"> Estimando </option>
 				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
 				  	<option name="homologando" value="homologando" selected="selected"> Homologando </option>
@@ -661,7 +578,7 @@
 				  </select></label>  <br><br> 
 				  <%}%>
 				  <%if(rms.getDemanda().equals("concluido")){ %>
-				  <label> Demanda <select name="demanda" id="demanda">
+				  <label> Status <select class="form-control" name="demanda" id="demanda">
 				  	<option name="estimando" value="estimando"> Estimando </option>
 				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
 				  	<option name="homologando" value="homologando"> Homologando </option>
@@ -670,7 +587,7 @@
 				  </select></label>  <br><br> 
 				  <%}%>
 				   <%if(rms.getDemanda().equals("cancelado")){ %>
-				  <label> Demanda <select name="demanda" id="demanda">
+				  <label> Status <select class="form-control" name="demanda" id="demanda">
 				  	<option name="estimando" value="estimando"> Estimando </option>
 				  	<option name="desenvolvendo" value="desenvolvendo"> Desenvolvendo </option>
 				  	<option name="homologando" value="homologando"> Homologando </option>
@@ -678,10 +595,157 @@
 				  	<option name="cancelado" value="cancelado" selected="selected"> Cancelado </option>
 				  </select></label>  <br><br> 
 				  <%}%>
-				  </div>
-                  <input type="submit" value="Atualizar" id="submit"> 
-                  <input type="reset" value="Limpar">
+                  <label>
+                  	Progresso:&nbsp<span id="sliderStatus"> <%out.print(rms.getProgresso());%></span> % 
+                  	<input type="range" id="range" name="progresso" min="0" max="100" value="<%out.print(rms.getProgresso());%>" step="10" onchange="sliderChange(this.value)">
+                  </label><br><br>
+                  <div class="form-group">
+				    <label for="comment"><span class="asterisco">*</span> Descrição</label>
+				    <textarea class="form-control" rows="5" name="descdemanda" id="descdemanda" value="<%out.println(rms.getDescricao_demanda()); %>" required></textarea>
+	              </div>
+             	
+                  <label> Solicitante vivo <input type="text" class="form-control" name="solvivo" id="solvivo" value="<%out.println(rms.getSolicitante_vivo()); %>"> </label>				
+                  <label> Analista Responsável <input type="text" class="form-control" name="analresp" id="analresp" value="<%out.println(rms.getAnal_resp()); %>"> </label>
+                  <label> Data Entrada Estimada <input type="date" class="form-control" name="entrada" id="entrada" value="<%out.print(rms.getDt_entrada_estimada());%>" /> </label> 
+                  <label> Data Entrega Estimada  <input type="date" class="form-control" name="entrega" id="entrega" value="<%out.print(rms.getDt_entrega_estm());%>"/></label> 
+                <%if(rms.getTipo_demanda().equals("pp")){ %>
+                  <label> Tipo da Demanda<select class="form-control" name="tipodemanda"> 
+                  		<option name="pp" value="pp" selected="selected">PP</option>
+                  		<option name="projeto" value="Projeto">Projeto</option>
+                  </select>  </label>
+                  <br><br>
+                  <% }else{%>
+                  <label> Tipo da Demanda<select class="form-control" name="tipodemanda"> 
+                  		<option name="pp" value="pp">PP</option>
+                  		<option name="projeto" value="Projeto" selected="selected">Projeto</option>
+                  </select>  </label>
+                  <%} %>
+                  <br><br>
+                  <label> Data Estimada Real  <input type="date" class="form-control" name="real" id="real" value="<%out.print(rms.getDt_real_estm());%>"/></label>
+                  <label> Estimativa Cliente  <input type="date" class="form-control" name="estimacliente" id="estimacliente" value="<%out.print(rms.getEstimativa_cliente());%>"></label> 
+                  
+                  
+                  <!--  Cada Jornada Equivale a 8 horas e cada ponto a 4 horas  --> 
+                  <label> Jornadas  <input type="number" class="form-control" name="jornadas" id="jornadas" value="<%out.print(rms.getJornadas());%>"/></label> 
+                  <label> Pontos <input type="number" class="form-control" name="pontos" id="pontos" value="<%out.print(rms.getPontos());%>"/></label>
+                  
+                  <!-- Se a situaÃ§Ã£o da demanda estiver em "APROVADA" deve aparecer o próximo formulário
+                  Caso for reprovada deve finalizar a demanda, demais opções permanecer em aberto-->
+                   
+                    <%if(rms.getSituacao_estimativa().equals("aberta")){ %>
+                  <label>Situação da Estimativa <select name="situacao" class="form-control" id="situacao" onchange="optionCheck()">
+                    	<option name="aberta" value="aberta" selected="selected"> Aberta </option>
+                 	   	<option name="andamento" value="andamento"> Em Andamento </option>
+                    	<option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
+                    	<option name="aprovada"  value="aprovada"> Aprovada </option>
+                    	<option name="reprovada" value="reprovada"> Reprovada </option>
+                    </select> </label> <br><br>	
+                    <%} %>
+                    <%if(rms.getSituacao_estimativa().equals("andamento")){ %>
+                    <label>Situação da Estimativa <select name="situacao" class="form-control" id="situacao" onchange="optionCheck()">
+                    	<option name="aberta" value="aberta" selected="selected"> Aberta </option>
+                 	   	<option name="andamento" value="andamento" selected="selected"> Em Andamento </option>
+                    	<option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
+                    	<option name="aprovada"  value="aprovada"> Aprovada </option>
+                    	<option name="reprovada" value="reprovada"> Reprovada </option>
+                    </select> </label> <br><br>	
+                    <%} %>
+                    <%if(rms.getSituacao_estimativa().equals("agaprovada")){ %>
+                    <label>Situação da Estimativa <select name="situacao" class="form-control" id="situacao" onchange="optionCheck()">
+                    	<option name="aberta" value="aberta" selected="selected"> Aberta </option>
+                 	   	<option name="andamento" value="andamento"> Em Andamento </option>
+                    	<option name="agaprovada" value="agaprovada" selected="selected"> Aguardando Aprovação </option>
+                    	<option name="aprovada"  value="aprovada"> Aprovada </option>
+                    	<option name="reprovada" value="reprovada"> Reprovada </option>
+                   	</select> </label> <br><br>	
+                    <%} %>
+                    <%if(rms.getSituacao_estimativa().equals("aprovada")){ %>
+                    <label>Situação da Estimativa <select name="situacao" class="form-control" id="situacao" onchange="optionCheck()">
+                    	<option name="aberta" value="aberta" selected="selected"> Aberta </option>
+                 	   	<option name="andamento" value="andamento"> Em Andamento </option>
+                    	<option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
+                    	<option name="aprovada"  value="aprovada" selected="selected"> Aprovada </option>
+                    	<option name="reprovada" value="reprovada"> Reprovada </option>
+                    </select> </label> <br><br>	
+                    <%} %>
+                    <%if(rms.getSituacao_estimativa().equals("reprovado")){ %>
+                    <label>Situação da Estimativa <select name="situacao" class="form-control" id="situacao" onchange="optionCheck()">
+                    	<option name="aberta" value="aberta" selected="selected"> Aberta </option>
+                 	   	<option name="andamento" value="andamento"> Em Andamento </option>
+                    	<option name="agaprovada" value="agaprovada"> Aguardando Aprovação </option>
+                    	<option name="aprovada"  value="aprovada"> Aprovada </option>
+                    	<option name="reprovada" value="reprovada" selected="selected"> Reprovada </option>
+                  	</select> </label> <br><br>	
+                    <%} %>
+                  
+                  
+                  
+                  <div class="divgrupo">
+                      <p class="grupo"> FASE DE DESENVOLVIMENTO </p>
+                  </div>
 
+                  <label> Linha CAP <input type="text" class="form-control" name="linhacap" id="linhacap" value="<%out.print(rms.getLinha_cap());%>"></label>
+                  <label> Início RMS v1 <input type="date" class="form-control" name="inrms" id="inrmsv1" value="<%out.print(rms.getInicio_rms());%>"></label>
+                  <label> Fim RMS v1 <input type="date" class="form-control" name="fimrms" id="fimrmsv1" value="<%out.print(rms.getFim_rms());%>"></label>
+                  <label> Aprovação RMS v1 <input type="date" class="form-control" name="aprms" id="aprmsv1" value="<%out.print(rms.getAprovacao_rms());%>"></label>
+                  <label> Início Dev <input type="date" class="form-control" name="indev" id="indev"  value="<%out.print(rms.getInicio_dev());%>"></label>
+                  <label> Fim Dev <input type="date" class="form-control" name="fimdev" id="fimdev" value="<%out.print(rms.getFim_dev());%>"></label>
+                  <label> Início Homologação Everis <input type="date" class="form-control" name="inhomoeveris" id="inhomoeveris" value="<%out.print(rms.getInicio_homo_everis());%>"></label>
+                  <label> Fim Homologação Everis <input type="date" class="form-control" name="fimhomoeveris" id="fimhomoeveris" value="<%out.print(rms.getFim_homo_everis());%>"></label> <br><br>
+                  <label> Início Planejamento  <input type="date" class="form-control" name="inplanejamento" id="planejamento" value="<%out.print(rms.getInplanejamento());%>"></label>
+                  <label> Fim Planejamento  <input type="date" class="form-control" name="fimplanejamento" id="planejamento" value="<%out.print(rms.getFimplanejamento());%>"></label>
+                  
+                  <%if(rms.getAnalise_funcional().equals("andamento")){%>
+                  <label> Análise Funcional <select class="form-control" name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento" selected="selected"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado"> Cancelado </option>
+                    <option name="finalizado" value="finalizado"> Finalizado </option>
+                    <option name="pendente" value="pendente"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  <%if(rms.getAnalise_funcional().equals("cancelado")){%>
+                  <label> Análise Funcional <select class="form-control" name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado" selected="selected"> Cancelado </option>
+                    <option name="finalizado" value="finalizado"> Finalizado </option>
+                    <option name="pendente" value="pendente"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  <%if(rms.getAnalise_funcional().equals("finalizado")){%>
+                  <label> Análise Funcional <select class="form-control" name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado"> Cancelado </option>
+                    <option name="finalizado" value="finalizado" selected="selected"> Finalizado </option>
+                    <option name="pendente" value="pendente"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  <%if(rms.getAnalise_funcional().equals("pendente")){%>
+                  <label> Análise Funcional <select class="form-control" name="analfun" id="analfun" onchange="optionCheck2()"> 
+                    <option name="andamento" value="andamento"> Em Andamento </option>
+                    <option name="cancelado" value="cancelado"> Cancelado </option>
+                    <option name="finalizado" value="finalizado"> Finalizado </option>
+                    <option name="pendente" value="pendente" selected="selected"> Pendente Informação </option>
+                  </select> </label> <br><br>
+                  <%} %>
+                  	
+                  			
+                  <div class="divgrupo">
+                      <p class="grupo"> FASE DE HOMOLOGAÇÃO </p>
+                  </div>
+                  
+                  <label> Esteira <input type="text" class="form-control" name="esteira" id="esteira" value="<%out.print(rms.getEsteira());%>"></label>
+                  <label> Início Homologação VIVO <input type="date" class="form-control" name="inhomovivo" id="inhomovivo" value="<%out.print(rms.getInicio_homo_vivo());%>"></label>
+                  <label> Fim Homologação VIVO <input type="date" class="form-control" name="fimhomovivo" id="fimhomovivo" value="<%out.print(rms.getFim_homo_vivo());%>"></label> 
+                  <label> Início Pré-Prod <input type="date" class="form-control" name="inpreprod" id="inpreprod" value="<%out.print(rms.getInicio_preprod());%>"></label>
+                  <label> Fim Pré-Prod <input type="date" class="form-control" name="fimpreprod" id="fimpreprod" value="<%out.print(rms.getFim_preprod());%>"></label>
+				  <br><br>
+						<span style="float: right;">
+						  <button type="reset" class="btn btn-primary" >Limpar</button>
+						  <button type="submit" class="btn btn-primary" id="submit">Atualizar</button>
+				  		</span>
+				  <br><br>
+				  	</div>
+				  </div>                  
               </fieldset>
           </form>
           <%} %>

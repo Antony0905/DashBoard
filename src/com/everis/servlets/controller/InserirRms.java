@@ -1,7 +1,6 @@
 package com.everis.servlets.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.everis.constants.Constants;
 import com.everis.dao.DaoGeneric;
 import com.everis.model.Rms;
 
@@ -34,7 +34,6 @@ public class InserirRms extends HttpServlet {
 
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		HttpSession session = request.getSession();
 		boolean rmsJaCadastrada;
@@ -233,44 +232,19 @@ public class InserirRms extends HttpServlet {
 				rms.setEsteira(esteira);
 				rms.setDemanda(demanda);
 				Boolean retorno = daoGeneric.salvar(rms);
-
 				if (retorno) {
-					out.println("<!DOCTYPE html>");
-					out.println("<html>");
-					out.println("<head>");
-					out.println("<title> Servlet </title>");
-					out.println("</head>");
-					out.println("<body>");
-					out.println("<h1> Inserção Realizada com Sucesso!! '" + dono + "' '" + idDemanda + "' '" + "' '"
-							+ situacao + "' '" + analfun + "' </h1>");
-					out.println("</body>");
-					out.println("</html>");
+					session.setAttribute("rmsSucesso", retorno);
+					response.sendRedirect(Constants.CAMINHO_PAGINA_INDEX);
 				} else {
-					out.println("<!DOCTYPE html>");
-					out.println("<html>");
-					out.println("<head>");
-					out.println("<title> Servlet </title>");
-					out.println("</head>");
-					out.println("<body>");
-					out.println("<h1> ERRO: Não foi possível inserir '" + esteira + "' '" + inhomovivo + "' '"
-							+ fimhomovivo + "' '" + inpreprod + "' '" + fimpreprod + "' '" + demanda + "'  </h1>");
-					out.println("</body>");
-					out.println("</html>");
+					response.sendRedirect(Constants.CAMINHO_PAGINA_ERROR);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 		}else {
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title> Servlet </title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1> ERRO: RMS Já Cadastrado </h1>");
-			out.println("</body>");
-			out.println("</html>");
+			session.setAttribute("rmsJaCadastrada", rmsJaCadastrada);
+			response.sendRedirect(Constants.CAMINHO_PAGINA_NOVO_PROJETO);
 		}
 	}
 

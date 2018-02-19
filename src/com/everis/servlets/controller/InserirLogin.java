@@ -1,7 +1,6 @@
 package com.everis.servlets.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.everis.constants.Constants;
 import com.everis.dao.DaoGeneric;
 import com.everis.model.Usuarios;
 
@@ -31,14 +32,15 @@ public class InserirLogin extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 		
-		PrintWriter out = response.getWriter();
 		boolean retorno = false;
+		HttpSession session = request.getSession();
 		setUsuarioJaCadastrado(false);
 		Usuarios usuarios = new Usuarios();
 
+		String usuario = request.getParameter("usuario");
 		usuarios.setNome(request.getParameter("nome"));
 		usuarios.setDepartamento(request.getParameter("dep"));
-		usuarios.setUsuario(request.getParameter("usuario"));
+		usuarios.setUsuario(usuario);
 		usuarios.setSenha(request.getParameter("senha"));
 		usuarios.setNivel(Integer.parseInt(request.getParameter("nivel")));
 
@@ -56,27 +58,12 @@ public class InserirLogin extends HttpServlet {
 		}
 
 		if (retorno) {
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title> Servlet </title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1> Inserção Realizada com Sucesso!! '" + usuarios.getNome() + "' '" + usuarios.getUsuario() + "' '" + usuarios.getSenha() + "' '" + usuarios.getDepartamento()
-					+ "' '" + usuarios.getNivel() + "' </h1>");
-			out.println("</body>");
-			out.println("</html>");
-
+			session.setAttribute("usuarioSucesso", retorno);
+			response.sendRedirect(Constants.CAMINHO_PAGINA_INDEX);
 		} else {
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title> Servlet </title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1> ERRO: Não foi possível inserir UserName '" + usuarios.getUsuario() + "' já existe </h1>");
-			out.println("</body>");
-			out.println("</html>");
+			session.setAttribute("usuarioJaCadastrado", true);
+			session.setAttribute("nomeJaCadastrado", usuario);
+			response.sendRedirect(Constants.CAMINHO_PAGINA_CADASTRO_USUARIO);
 		}
 
 	}

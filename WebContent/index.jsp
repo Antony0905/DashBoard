@@ -54,10 +54,48 @@
   <script>
   Breakpoints();
   </script>
+<script type="text/javascript">
+
+	function abrirModalRmsSucesso(){
+		document.getElementById('abrirModal').click();
+	}
+	
+	function abrirModalAtualizar(){
+		document.getElementById('abrirModalAtualizar').click();
+	}
+	
+	function abrirModalUsuario(){
+		document.getElementById('abrirModalUsuario').click();
+	}
+	
+</script>
 </head>
+
+<%	Boolean rmsSucesso = (Boolean) session.getAttribute("rmsSucesso");
+	Boolean rmsAtualizadoSucesso = (Boolean) session.getAttribute("rmsAtualizadoSucesso");
+	Boolean usuarioSucesso = (Boolean) session.getAttribute("usuarioSucesso");
+	if(rmsSucesso == null){
+		rmsSucesso = false;
+	}
+	if(rmsAtualizadoSucesso == null){
+		rmsAtualizadoSucesso = false;
+	}
+	if(usuarioSucesso == null){
+		usuarioSucesso = false;
+	}
+%>
+<%if(rmsSucesso){ %>
+<body class="site-navbar-small dashboard" onload="abrirModalRmsSucesso()">
+<%}else if(rmsAtualizadoSucesso){ %>
+<body class="site-navbar-small dashboard" onload="abrirModalAtualizar()">
+<%}else if(usuarioSucesso){ %>
+<body class="site-navbar-small dashboard" onload="abrirModalUsuario()">
+<%}else{ %>  
 <body class="site-navbar-small dashboard">
-
-
+<%} session.removeAttribute("rmsSucesso");
+	session.removeAttribute("rmsAtualizadoSucesso");
+	session.removeAttribute("usuarioSucesso");%>
+  
   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -405,63 +443,6 @@
       
     </ul>
   </div>
-  <div class="site-gridmenu">
-    <div>
-      <div>
-        <ul>
-          <li>
-            <a href="apps/mailbox/mailbox.html">
-              <i class="icon md-email"></i>
-              <span>Mailbox</span>
-            </a>
-          </li>
-          <li>
-            <a href="apps/calendar/calendar.html">
-              <i class="icon md-calendar"></i>
-              <span>Calendar</span>
-            </a>
-          </li>
-          <li>
-            <a href="apps/contacts/contacts.html">
-              <i class="icon md-account"></i>
-              <span>Contacts</span>
-            </a>
-          </li>
-          <li>
-            <a href="apps/media/overview.html">
-              <i class="icon md-videocam"></i>
-              <span>Media</span>
-            </a>
-          </li>
-          <li>
-            <a href="apps/documents/categories.html">
-              <i class="icon md-receipt"></i>
-              <span>Documents</span>
-            </a>
-          </li>
-          <li>
-            <a href="apps/projects/projects.html">
-              <i class="icon md-image"></i>
-              <span>Project</span>
-            </a>
-          </li>
-          <li>
-            <a href="apps/forum/forum.html">
-              <i class="icon md-comments"></i>
-              <span>Forum</span>
-            </a>
-          </li>
-          <li>
-            <a href="index.html">
-              <i class="icon md-view-dashboard"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  
         <% 
 		DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
 		List<Rms> listaRms = new ArrayList<Rms>();
@@ -669,6 +650,81 @@
 				<%} %>
                 </tbody>
               </table>
+            
+          <!-- Modal -->
+            <button type="button" id="abrirModal" data-toggle="modal" data-target="#modalRmsCadastradaComSucesso" hidden="true"/>
+		  	</button> 
+				  
+			<div class="modal fade" id="modalRmsCadastradaComSucesso" tabindex="-1" role="dialog" aria-labelledby="modalRmsCadastradaComSucesso" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="modalRmsCadastradaComSucesso">Atenção</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			         Projeto cadastrado com sucesso!
+			      </div>
+			      <div class="modal-footer">
+			      <form>
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- End Modal -->
+			
+			<!-- Modal -->
+            <button type="button" id="abrirModalAtualizar" data-toggle="modal" data-target="#modalRmsAtualizadoComSucesso" hidden="true"/>
+		  	</button> 
+				  
+			<div class="modal fade" id="modalRmsAtualizadoComSucesso" tabindex="-1" role="dialog" aria-labelledby="modalRmsAtualizadoComSucesso" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="modalRmsAtualizadoComSucesso">Atenção</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			         Projeto atualizado com sucesso!
+			      </div>
+			      <div class="modal-footer">
+			      <form>
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- End Modal -->
+			
+			<!-- Modal -->
+            <button type="button" id="abrirModalUsuario" data-toggle="modal" data-target="#modalUsuarioCadastradoComSucesso" hidden="true"/>
+		  	</button> 
+				  
+			<div class="modal fade" id="modalUsuarioCadastradoComSucesso" tabindex="-1" role="dialog" aria-labelledby="modalUsuarioCadastradoComSucesso" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="modalUsuarioCadastradoComSucesso">Atenção</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			         Usuários Cadastrado Com Sucesso!
+			      </div>
+			      <div class="modal-footer">
+			      <form>
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- End Modal -->
             </div>
           </div>
           <!-- End Panel Projects Stats -->

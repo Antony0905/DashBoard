@@ -1,7 +1,6 @@
 package com.everis.servlets.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -10,7 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.everis.constants.Constants;
 import com.everis.dao.DaoGeneric;
 import com.everis.model.Rms;
 
@@ -31,8 +32,8 @@ public class AtualizarRms extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");		
+		HttpSession session = request.getSession();
 		
 		String iddemanda = request.getParameter("iddemanda");
 		
@@ -230,30 +231,14 @@ public class AtualizarRms extends HttpServlet {
 			Boolean retorno = daoGeneric.salvar(rms);
 
 			if (retorno) {
-				out.println("<!DOCTYPE html>");
-				out.println("<html>");
-				out.println("<head>");
-				out.println("<title> Servlet </title>");
-				out.println("</head>");
-				out.println("<body>");
-				out.println("<h1> Inserção Realizada com Sucesso!! '" + iddemanda + "' '" + "' '"
-						+ situacao + "' '" + analfun + "' </h1>");
-				out.println("</body>");
-				out.println("</html>");
+				session.setAttribute("rmsAtualizadoSucesso", retorno);
+				response.sendRedirect(Constants.CAMINHO_PAGINA_INDEX);
 			} else {
-				out.println("<!DOCTYPE html>");
-				out.println("<html>");
-				out.println("<head>");
-				out.println("<title> Servlet </title>");
-				out.println("</head>");
-				out.println("<body>");
-				out.println("<h1> ERRO: Não foi possível inserir '" + esteira + "' '" + inhomovivo + "' '" + fimhomovivo
-						+ "' '" + inpreprod + "' '" + fimpreprod + "' '" + demanda + "'  </h1>");
-				out.println("</body>");
-				out.println("</html>");
+				response.sendRedirect(Constants.CAMINHO_PAGINA_ERROR);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			response.sendRedirect(Constants.CAMINHO_PAGINA_ERROR);
 		}
 
 	}

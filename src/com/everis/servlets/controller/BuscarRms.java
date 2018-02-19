@@ -41,12 +41,17 @@ public class BuscarRms extends HttpServlet {
 		doGet(request, response);
 
 		String id = request.getParameter("pesquisa");
-
+		Boolean idPesquisadoNaoEncontrado = false;
 		DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
 
 		List<Rms> listaRms = daoGeneric.buscarRmsPorId(Rms.class, id);
+		if(listaRms.isEmpty()||listaRms == null) {
+			idPesquisadoNaoEncontrado = true;
+		}
+		
 		HttpSession sessao = request.getSession();
 		sessao.setAttribute("listaRms", listaRms);
+		sessao.setAttribute("idPesquisadoNaoEncontrado", idPesquisadoNaoEncontrado);
 		response.sendRedirect(Constants.CAMINHO_PAGINA_EDITAR_DEMANDA);
 	}
 
