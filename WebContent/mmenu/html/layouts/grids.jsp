@@ -74,11 +74,15 @@
 		document.getElementById('sliderStatus').innerHTML = val;
 	}
   </script>
+  
+  <style type="text/css">
+
+.asterisco{
+	color: red;
+	font-weight: bold;
+}
+</style>
 </head>
-
-
-
-
 <body class="site-navbar-small ">
   <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -547,9 +551,9 @@
                       <p class="grupo"> FASE DE ESTIMATIVA </p>
                   </div>
                   <label>Usuário Dono: <span style="font-weight: bold;"><%out.print(rms.getDono());%></span><br><br>
-                  <label> ID Demanda &nbsp&nbsp <input type="text" class="form-control" name="iddemanda" id="iddemanda" value="<%out.println(rms.getId_Demanda()); %>" readonly> </label>
-                  <label> Projeto <input type="text" class="form-control" name="projeto" id="projeto" value="<%out.println(rms.getProjeto()); %>" readonly> </label>
-                  <label> Data de Release <input type="date" class="form-control" name="datarelease" id="datarelease""></label>
+                  <label><span class="asterisco">*</span> ID Demanda &nbsp&nbsp <input type="text" class="form-control" name="iddemanda" id="iddemanda" value="<%out.println(rms.getId_Demanda()); %>" readonly> </label>
+                  <label><span class="asterisco">*</span> Projeto <input type="text" class="form-control" name="projeto" id="projeto" value="<%out.println(rms.getProjeto()); %>" readonly> </label>
+                  <label> Data Release <input type="date" class="form-control" name="datarelease" id="datarelease" value="<%out.print(rms.getDt_release());%>"></label>
                     <%if(rms.getDemanda().equals("estimando")){ %>
 				  <label> Status <select class="form-control" name="demanda" id="demanda">
 				  	<option name="estimando" value="estimando" selected="selected"> Estimando </option>
@@ -557,7 +561,7 @@
 				  	<option name="homologando" value="homologando"> Homologando </option>
 				  	<option name="concluido" value="concluido"> Concluído </option>
 				  	<option name="cancelado" value="cancelado"> Cancelado </option>
-				  </select></label>  <br><br> 
+				  </select></label>
 				  <%}%>
 				  <%if(rms.getDemanda().equals("desenvolvendo")){ %>
 				  <label> Status <select class="form-control" name="demanda" id="demanda">
@@ -566,7 +570,7 @@
 				  	<option name="homologando" value="homologando"> Homologando </option>
 				  	<option name="concluido" value="concluido"> Concluído </option>
 				  	<option name="cancelado" value="cancelado"> Cancelado </option>
-				  </select></label>  <br><br> 
+				  </select></label>
 				  <%}%>
 				  <%if(rms.getDemanda().equals("homologando")){ %>
 				  <label> Status <select class="form-control" name="demanda" id="demanda">
@@ -575,7 +579,7 @@
 				  	<option name="homologando" value="homologando" selected="selected"> Homologando </option>
 				  	<option name="concluido" value="concluido"> Concluído </option>
 				  	<option name="cancelado" value="cancelado"> Cancelado </option>
-				  </select></label>  <br><br> 
+				  </select></label>
 				  <%}%>
 				  <%if(rms.getDemanda().equals("concluido")){ %>
 				  <label> Status <select class="form-control" name="demanda" id="demanda">
@@ -584,7 +588,7 @@
 				  	<option name="homologando" value="homologando"> Homologando </option>
 				  	<option name="concluido" value="concluido" selected="selected"> Concluído </option>
 				  	<option name="cancelado" value="cancelado"> Cancelado </option>
-				  </select></label>  <br><br> 
+				  </select></label>
 				  <%}%>
 				   <%if(rms.getDemanda().equals("cancelado")){ %>
 				  <label> Status <select class="form-control" name="demanda" id="demanda">
@@ -593,7 +597,7 @@
 				  	<option name="homologando" value="homologando"> Homologando </option>
 				  	<option name="concluido" value="concluido"> Concluído </option>
 				  	<option name="cancelado" value="cancelado" selected="selected"> Cancelado </option>
-				  </select></label>  <br><br> 
+				  </select></label>
 				  <%}%>
                   <label>
                   	Progresso:&nbsp<span id="sliderStatus"> <%out.print(rms.getProgresso());%></span> % 
@@ -601,7 +605,7 @@
                   </label><br><br>
                   <div class="form-group">
 				    <label for="comment"><span class="asterisco">*</span> Descrição</label>
-				    <textarea class="form-control" rows="5" name="descdemanda" id="descdemanda" value="<%out.println(rms.getDescricao_demanda()); %>" required></textarea>
+				    <textarea class="form-control" rows="5" name="descdemanda" id="descdemanda" required><%out.println(rms.getDescricao_demanda());%></textarea>
 	              </div>
              	
                   <label> Solicitante vivo <input type="text" class="form-control" name="solvivo" id="solvivo" value="<%out.println(rms.getSolicitante_vivo()); %>"> </label>				
@@ -668,7 +672,7 @@
                     	<option name="reprovada" value="reprovada"> Reprovada </option>
                     </select> </label> <br><br>	
                     <%} %>
-                    <%if(rms.getSituacao_estimativa().equals("reprovado")){ %>
+                    <%if(rms.getSituacao_estimativa().equals("reprovada")){ %>
                     <label>Situação da Estimativa <select name="situacao" class="form-control" id="situacao" onchange="optionCheck()">
                     	<option name="aberta" value="aberta" selected="selected"> Aberta </option>
                  	   	<option name="andamento" value="andamento"> Em Andamento </option>

@@ -12,4 +12,6 @@ public interface Constants {
 	
 	public String CAMINHO_PAGINA_CADASTRO_USUARIO = "mmenu/html/pages/register.jsp";
 	
+	public String CAMINHO_PAGINA_VISUALIZAR_DEMANDA_OUTRO_USUARIO = "mmenu/html/pages/view-projects.jsp";
+	
 }

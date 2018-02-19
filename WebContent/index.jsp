@@ -5,6 +5,7 @@
 	import="javax.servlet.http.HttpSession"   
 	import="java.util.List" 
 	import="com.everis.model.Rms"
+	import="com.everis.model.Usuarios"
 	import="com.everis.dao.DaoGeneric"
 	import="java.util.ArrayList"
 %>
@@ -67,7 +68,7 @@
 	function abrirModalUsuario(){
 		document.getElementById('abrirModalUsuario').click();
 	}
-	
+		
 </script>
 </head>
 
@@ -538,13 +539,39 @@
               <div class="padding-20 padding-top-10">
                 <div class="clearfix">
                   <div class="grey-800 pull-left padding-vertical-10">
-                  	<i class="icon md-flash grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>Projetos <span style="color: #d2d217;font-weight: bold;">Cadastrados</span>
+                  	<i class="icon md-flash grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>Meus Projetos <span style="color: #d2d217;font-weight: bold;">Cadastrados</span>
                   </div>
                   <span class="pull-right grey-700 font-size-30"><%out.print(listaRms.size());%></span>
                 </div>
-                <div class="margin-bottom-20 grey-500">
-                  <i class="icon md-long-arrow-up green-500 font-size-16"></i> Possui uma boa média
+                <%List<Usuarios> listaUsuarios = new ArrayList<Usuarios>();
+                  DaoGeneric<Usuarios> daoGenericUsuarios = new DaoGeneric<Usuarios>();
+                  listaUsuarios = daoGenericUsuarios.buscarUsuarios(Usuarios.class);
+                  Integer countDemandas = (Integer) session.getAttribute("countDemandas");
+                  String usuarioSelecionado = (String) session.getAttribute("usuarioSelecionado");
+                  if(countDemandas == null ){
+                	  countDemandas = 0;
+                  }
+                  if(usuarioSelecionado == null){
+                	  usuarioSelecionado = "";
+                  }
+                  
+                  
+                %>
+                <div class="margin-bottom-10 grey-500">
+                <form action="RequestUsuarios" method="POST">
+                 Selecione um Usuário <select id="usuarios" class="form-control" id="usuarios" name="usuario" onchange="this.form.submit()">
+                 		<option value=""></option>
+                 		<%for(int i=0; i < listaUsuarios.size(); i++){
+                 			Usuarios usuario = listaUsuarios.get(i);%>
+                        	<option value="<%out.print(usuario.getUsuario()); %>"> <%out.print(usuario.getNome()); %> </option>
+                 		<%}%>
+                  	</select>
+                 </form>
                 </div>
+                  <div class="grey-800 pull-left">
+                  	<i class="icon md-flash grey-600 font-size-24 vertical-align-bottom margin-right-5"></i>Projetos <span style="color: #d2d217;font-weight: bold;font-size: 15px;"><%out.print(usuarioSelecionado);%></span>
+                  </div>
+					<a href="ViewProjetos?usuarioSelecionado=<%out.println(usuarioSelecionado);%>"><span class="pull-right grey-700 font-size-20" style="position: top;"><%out.print(countDemandas);%></span></a>
                 </div>
                 <div class="ct-chart height-50"></div>
               </div>
@@ -552,7 +579,10 @@
           </div>
           <!-- End Widget Linearea Four -->
         </div>
-        <div class="clearfix"></div>
+        <% session.removeAttribute("countDemandas");%>
+        <% session.removeAttribute("usuarioSelecionado");%>
+        <div class="row" data-plugin="matchHeight" data-by-row="true">
+        <div class="clearfix">
         
         <div class="col-xlg-5 col-md-6">
           <!-- Panel Projects -->
@@ -587,8 +617,10 @@
            		</script>
             </div>
           </div>
+          </div>
           <!-- End Panel Projects -->
-        </div>
+        
+        
         <div class="col-xlg-7 col-md-6">
           <!-- Panel Projects Status -->
           <div class="panel" id="projects-status">
@@ -650,7 +682,7 @@
 				<%} %>
                 </tbody>
               </table>
-            
+            </div>
           <!-- Modal -->
             <button type="button" id="abrirModal" data-toggle="modal" data-target="#modalRmsCadastradaComSucesso" hidden="true"/>
 		  	</button> 
