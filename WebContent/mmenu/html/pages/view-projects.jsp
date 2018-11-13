@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="../../../global/fonts/material-design/material-design.min.css">
   <link rel="stylesheet" href="../../../global/fonts/brand-icons/brand-icons.min.css">
   <link rel="stylesheet" href="../../../global/mycss/global.css">
+  <link rel="stylesheet" href="../../../global/mycss/view-project.css">
   <!--[if lt IE 9]>
     <script src="../../../global/vendor/html5shiv/html5shiv.min.js"></script>
     <![endif]-->
@@ -521,26 +522,17 @@
 		DaoGeneric<Rms> daoGeneric = new DaoGeneric<Rms>();
 		List<Rms> listaRms = new ArrayList<Rms>();
 		String usuarioSelecionado = (String) session.getAttribute("usuarioSelecionado");
-		listaRms = daoGeneric.buscarRms(Rms.class, usuarioSelecionado);
+		String statusRms = (String) session.getAttribute("statusRms");
+		listaRms = daoGeneric.buscarRmsPorStatus(Rms.class, usuarioSelecionado, statusRms);
 		if(usuarioSelecionado ==null){
 			usuarioSelecionado = "";
 		}
 		int concluido = 0;
 		int cancelado = 0;
 		int andamento = 0;
+		String status[] = {"Todos","Estimando","Desenvolvendo","Homologando","Concluído","Cancelado"};
 		
-		for(int i = 0; i < listaRms.size(); i++){
-			Rms obj = listaRms.get(i);
-			if(obj.getDemanda().equals("concluido")){
-				concluido++;
-			}
-			if(obj.getDemanda().equals("cancelado")){
-				cancelado++;
-			}
-			if(obj.getDemanda().equals("andamento")||obj.getDemanda().equals("estimando")||obj.getDemanda().equals("homologando")){
-				andamento++;
-			}
-		}
+
 %>
 
 <%	List<Usuarios> listaUsuarios = new ArrayList<Usuarios>();
@@ -553,13 +545,27 @@
     <div class="page-content">
       <div class="panel">
          <div >
-           <form action="../../../ViewProjetos" method="POST" style="width: 250px;padding-left: 6%;padding-top: 4%;">
-                 Selecione um Usuário <select id="usuarios" class="form-control" id="usuarioSelecionado" name="usuarioSelecionado" onchange="this.form.submit()">
-                 		<option value=""></option>
-                 		<%for(int i=0; i < listaUsuarios.size(); i++){
-                 			Usuarios usuario = listaUsuarios.get(i);%>
+           <form action="../../../ViewProjetos" method="POST" style="width: 800px;padding-left: 6%;padding-top: 4%;">
+                 Usuário <select id="usuarios" style="width: 180px;" class="formcontrol" id="usuarioSelecionado" name="usuarioSelecionado" onchange="this.form.submit()">
+                 		<option value="">Selecione</option>
+                 	<%for(int i=0; i < listaUsuarios.size(); i++){
+                 			Usuarios usuario = listaUsuarios.get(i);
+                 			
+                 		if(usuario.getUsuario().equals(usuarioSelecionado)){%>
+                 			<option value="<%out.print(usuario.getUsuario()); %>" selected="selected"> <%out.print(usuario.getNome()); %> </option>
+                 		<%}else{%>
                         <option value="<%out.print(usuario.getUsuario()); %>"> <%out.print(usuario.getNome()); %> </option>
-                 	<%}%>
+                 		<%}
+                 	}%>
+                 </select>
+                 <span style="margin-left: 20px;">Status</span> <select id="status" name="status" style="width: 180px;" class="formcontrol" onchange="this.form.submit()">
+                 		<%for(int i=0;i<status.length;i++){ 
+                 			if(status[i].equals(statusRms)){  %>
+                 				<option value="<%out.print(status[i]);%>" selected="selected"><%out.print(status[i]);%></option>
+                 			<%}else{ %>
+                 				<option value="<%out.print(status[i]);%>"><%out.print(status[i]);%></option>
+                 		   <%}
+                 		 } %>
                  </select>
             </form>
          </div>
@@ -573,6 +579,7 @@
             <div class="panel-heading">
               <h3 class="panel-title" style="font-weight: bold;">
                 Projetos Usuarios <span style="color: red;"><%out.print(usuarioSelecionado);%></span>
+                <span style="float:right;width: 140px;text-align: center;">Total <span style="color:green;padding-left: 8%;"><%out.print(listaRms.size());%></span></span>
               </h3>
             </div>
             <div class="table-responsive">

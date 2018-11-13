@@ -21,8 +21,10 @@ public class ViewProjetos extends HttpServlet {
 			throws ServletException, IOException {
 
 		String usuario = request.getParameter("usuarioSelecionado");
+		String status = request.getParameter("status");
 		HttpSession sessao = request.getSession();
 		sessao.setAttribute("usuarioSelecionado", usuario);
+		sessao.setAttribute("statusRms", status);
 		System.out.println(usuario);
 		response.sendRedirect(Constants.CAMINHO_PAGINA_VISUALIZAR_DEMANDA_OUTRO_USUARIO);
 

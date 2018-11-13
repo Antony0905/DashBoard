@@ -29,7 +29,8 @@ public class DaoGeneric<E> {
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 
-		Query HQL = entityManager.createQuery("delete from " + entidade.getClass().getCanonicalName() + " where id_demanda = ?");
+		Query HQL = entityManager
+				.createQuery("delete from " + entidade.getClass().getCanonicalName() + " where id_demanda = ?");
 		HQL.setParameter(1, id);
 		HQL.executeUpdate();
 		entityTransaction.commit();
@@ -68,7 +69,37 @@ public class DaoGeneric<E> {
 
 		return listaUsuarios;
 	}
-	
+
+	public List<E> buscarRmsPorStatus(Class<E> entidade, String usuario, String status) {
+
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		if (status == null || status.isEmpty()) {
+			status = "Todos";
+		}
+		
+		if (status.equals("Todos")) {
+			Query HQL = entityManager.createQuery("from " + entidade.getName() + " where dono = ?");
+			HQL.setParameter(1, usuario);
+			@SuppressWarnings("unchecked")
+			List<E> listaUsuarios = HQL.getResultList();
+			entityTransaction.commit();
+			entityManager.close();
+			return listaUsuarios;
+		} else {
+			Query HQL = entityManager.createQuery("from " + entidade.getName() + " where dono = ? and demanda = ?");
+			HQL.setParameter(1, usuario);
+			HQL.setParameter(2, status);
+			@SuppressWarnings("unchecked")
+			List<E> listaUsuarios = HQL.getResultList();
+			entityTransaction.commit();
+			entityManager.close();
+			return listaUsuarios;
+		}
+
+	}
+
 	public List<E> buscarRmsPorId(Class<E> entidade, String id) {
 
 		EntityManager entityManager = JPAUtil.getEntityManager();
@@ -84,7 +115,7 @@ public class DaoGeneric<E> {
 
 		return listaUsuarios;
 	}
-	
+
 	public Rms buscarRmsObjectPorId(Class<E> entidade, String id) {
 
 		EntityManager entityManager = JPAUtil.getEntityManager();
@@ -99,7 +130,7 @@ public class DaoGeneric<E> {
 
 		return rms;
 	}
-	
+
 	public boolean verificarSeRmsJaEstaCadastrada(Class<E> entidade, String id) {
 
 		EntityManager entityManager = JPAUtil.getEntityManager();
